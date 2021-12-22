@@ -54,7 +54,7 @@ class PurgeAction extends FormAction {
 			return;
 		}
 
-		if ( $this->getRequest()->wasPosted() ) {
+		if ( $this->getRequest()->wasPosted() || $user->isAllowed( 'freepurge' ) ) {
 			$this->redirectParams = wfArrayToCgi( array_diff_key(
 				$this->getRequest()->getQueryValues(),
 				[ 'title' => null, 'action' => null ]
