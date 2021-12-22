@@ -16,6 +16,11 @@
 			storeKey: 'mwedit-state-hiddenCategories'
 		},
 		{
+			listSel: '.schemeUsed ul',
+			togglerSel: '.mw-schemeUsedExplanation',
+			cookieName: 'scheme-used-list'
+		},
+		{
 			listSel: '.preview-limit-report-wrapper',
 			togglerSel: '.mw-limitReportExplanation',
 			storeKey: 'mwedit-state-limitReport'
