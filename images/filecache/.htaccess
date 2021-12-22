@@ -1,0 +1,12 @@
+Options -Indexes
+
+Header set Cache-Control "public"
+Header set Content-Type "text/html; charset=utf-8"
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Methods "GET, POST"
+
+RewriteCond %{REQUEST_URI} !\.html$
+ReWriteCond %{THE_REQUEST} ^GET\x20/filecache/([0-9a-f]/[0-9a-f]+/[^\x20/]+)\x20HTTP
+RewriteRule ^(.+)$ /$1.html [B,NS,L,R=302]
+
+# https://thwiki.cc/filecache/1/11/%25E5%25B9%25BB%25E5%25A4%259C.html

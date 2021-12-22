@@ -1,6 +1,23 @@
+Header set Access-Control-Allow-Origin *
+Header unset X-Frame-Options
+Header set Access-Control-Expose-Headers "Age, Date, Content-Length, Content-Range, X-Cache, X-Varnish"
+Header set Cache-Control "public"
+Header set Strict-Transport-Security "max-age=5184000;"
+
+# Protect against bug T30235
 <IfModule rewrite_module>
 	RewriteEngine On
+
+	RewriteCond %{HTTPS} !=on
+	RewriteRule ^(.*)$ https://upload.thwiki.cc/$1 [R=301,L,QSA]
+
 	RewriteOptions inherit
+	RewriteCond %{QUERY_STRING} \.[^\\/:*?\x22<>|%]+(#|\?|$) [nocase]
+	RewriteRule . - [forbidden]
 	# Fix for bug T64289
 	Options +FollowSymLinks
+
+	RewriteCond %{QUERY_STRING} ^download$
+	RewriteRule .* - [E=DOWNLOAD:yes]
+	Header set "Content-Disposition" "attachment" env=DOWNLOAD
 </IfModule>
