@@ -1638,7 +1638,7 @@ abstract class Skin extends ContextSource {
 		$services = MediaWikiServices::getInstance();
 		$callback = function ( $old = null, &$ttl = null ) {
 			$bar = [];
-			$this->addToSidebar( $bar, 'sidebar' );
+			//$this->addToSidebar( $bar, 'sidebar' );
 			$this->getHookRunner()->onSkinBuildSidebar( $this, $bar );
 			$msgCache = MediaWikiServices::getInstance()->getMessageCache();
 			if ( $msgCache->isDisabled() ) {
