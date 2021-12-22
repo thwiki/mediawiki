@@ -36,7 +36,7 @@
 # T17461: Make IE8 turn off content sniffing. Everybody else should ignore this
 # We're adding it here so that it's *always* set, even for alternate entry
 # points and when $wgOut gets disabled or overridden.
-header( 'X-Content-Type-Options: nosniff' );
+// header( 'X-Content-Type-Options: nosniff' );
 
 # Valid web server entry point, enable includes.
 # Please don't move this line to includes/Defines.php. This line essentially
@@ -50,6 +50,9 @@ $IP = getenv( 'MW_INSTALL_PATH' );
 if ( $IP === false ) {
 	$IP = dirname( __DIR__ );
 }
+
+require_once( $IP . '/extensions/Deny/deny.php' );
+testRestriction();
 
 // If no LocalSettings file exists, try to display an error page
 // (use a callback because it depends on TemplateParser)
