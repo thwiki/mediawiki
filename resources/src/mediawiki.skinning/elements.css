@@ -11,84 +11,19 @@
 /* Links */
 a {
 	text-decoration: none;
-	color: #0645ad;
 	background: none;
 }
 
-a:not( [ href ] ) {
+a:not([href]) {
 	cursor: pointer; /* Always cursor:pointer even without href */
 }
 
-a:visited {
-	color: #0b0080;
-}
-
-a:active {
-	color: #faa700;
-}
-
-a:hover,
-a:focus {
-	text-decoration: underline;
-}
-
-a:lang( ar ),
-a:lang( kk-arab ),
-a:lang( mzn ),
-a:lang( ps ),
-a:lang( ur ) {
+a:lang(ar),
+a:lang(kk-arab),
+a:lang(mzn),
+a:lang(ps),
+a:lang(ur) {
 	text-decoration: none;
-}
-
-a.stub {
-	color: #723;
-}
-
-a.new,
-#p-personal a.new {
-	color: #d33;
-}
-
-/* self links */
-a.mw-selflink {
-	color: inherit;
-	font-weight: bold;
-	text-decoration: inherit;
-}
-
-a.mw-selflink:hover {
-	cursor: inherit;
-	text-decoration: inherit;
-}
-
-a.mw-selflink:active,
-a.mw-selflink:visited {
-	color: inherit;
-}
-
-a.new:visited,
-#p-personal a.new:visited {
-	color: #a55858;
-}
-
-/* Interwiki & External links */
-.mw-parser-output a.extiw,
-.mw-parser-output a.external {
-	color: #36b;
-}
-
-.mw-parser-output a.extiw:visited,
-.mw-parser-output a.external:visited {
-	color: #636; /* See T5112. */
-}
-
-.mw-parser-output a.extiw:active,
-.mw-parser-output a.external:active {
-	color: #b63;
-}
-
-.mw-parser-output a.external.free {
-	word-wrap: break-word;
 }
 
 /* Inline Elements */
@@ -99,7 +34,6 @@ img {
 
 hr {
 	height: 1px;
-	background-color: #a2a9b1;
 	border: 0;
 	margin: 0.2em 0;
 }
@@ -111,49 +45,24 @@ h3,
 h4,
 h5,
 h6 {
-	color: #000;
+	background: none;
+	font-weight: normal;
 	margin: 0;
+	overflow: hidden;
 	padding-top: 0.5em;
 	padding-bottom: 0.17em;
-	overflow: hidden;
 }
 
+/* Some space under the headers in the content area */
 h1,
 h2 {
 	margin-bottom: 0.6em;
-	border-bottom: 1px solid #a2a9b1;
 }
 
 h3,
 h4,
 h5 {
 	margin-bottom: 0.3em;
-}
-
-h1 {
-	font-size: 188%;
-	font-weight: normal;
-}
-
-h2 {
-	font-size: 150%;
-	font-weight: normal;
-}
-
-h3 {
-	font-size: 128%;
-}
-
-h4 {
-	font-size: 116%;
-}
-
-h5 {
-	font-size: 108%;
-}
-
-h6 {
-	font-size: 100%;
 }
 
 p {
@@ -165,7 +74,8 @@ p img {
 }
 
 ul {
-	margin: 0.3em 0 0 1.6em;
+	list-style-type: disc;
+	margin: 0.3em 0 0 1.5em;
 	padding: 0;
 }
 
@@ -190,7 +100,7 @@ dl {
 }
 
 dd {
-	margin-left: 1.6em;
+	margin-left: 2em;
 	margin-bottom: 0.1em;
 }
 
@@ -207,18 +117,12 @@ samp,
 }
 
 code {
-	color: #000;
-	background-color: #f8f9fa;
-	border: 1px solid #eaecf0;
 	border-radius: 2px;
 	padding: 1px 4px;
 }
 
 pre,
 .mw-code {
-	color: #000;
-	background-color: #f8f9fa;
-	border: 1px solid #eaecf0;
 	padding: 1em;
 	/* Wrap lines in overflow. T2260, T103780 */
 	white-space: pre-wrap;
@@ -235,7 +139,6 @@ table {
 
 /* Forms */
 fieldset {
-	border: 1px solid #2a4b8d;
 	margin: 1em 0 1em 0;
 	padding: 0 1em 1em;
 }
