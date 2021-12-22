@@ -1017,6 +1017,13 @@ class HookRunner implements
 		);
 	}
 
+	public function onBeforeAddToImageList( $file, &$result ) {
+		return $this->container->run(
+			'BeforeAddToImageList',
+			[ $file, &$result ]
+		);
+	}
+
 	public function onBeforeAddToGallery( &$title, &$html, &$alt, &$link, &$handlerOpts ) {
 		return $this->container->run(
 			'BeforeAddToGallery',
