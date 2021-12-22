@@ -185,9 +185,9 @@
 	 */
 	mw.widgets.SearchInputWidget.prototype.getOptionsFromData = function ( data ) {
 		var items = [],
-			titles = data.data[ 1 ],
-			descriptions = data.data[ 2 ],
-			urls = data.data[ 3 ],
+			titles = data.data[ 0 ],
+			descriptions = data.data[ 1 ],
+			urls = data.data[ 2 ],
 			self = this;
 
 		// eslint-disable-next-line no-jquery/no-each-util
