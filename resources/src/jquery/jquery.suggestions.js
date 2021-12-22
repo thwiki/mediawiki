@@ -89,6 +89,23 @@
  */
 
 ( function () {
+	if (typeof $.fn.onType === 'undefined'){
+		$.fn.onType = (function (){
+			var events = ['keyup', 'click', 'focus', 'input', 'change', 'propertychange', 'selected', 'touch'];
+			var list = events.join( ' ' );
+			return function ( fn ) {
+				var order = 0, _this = this, fn2 = function ( e ) {
+					++order == 1 && !this.isSameVal() && fn.call( this, e );
+				};
+				return this.on( list, function ( e ) {
+					order = 0;
+					setTimeout( function () {
+						fn2.call( _this, e );
+					}, events.indexOf( e.type ) + 1 );
+				} );
+			}
+		})();
+	}
 
 	/**
 	 * Cancel any delayed maybeFetch() call and callback the context so
@@ -762,6 +779,11 @@
 							keypress( e, context, context.data.keypressed );
 						}
 					} )
+					.on( 'focus', function ( e ) {
+						e.preventDefault();
+						e.stopPropagation();
+						update( context, false );
+					} )
 					.on( 'blur', function () {
 						// When losing focus because of a mousedown
 						// on a suggestion, don't hide the suggestions
@@ -771,6 +793,11 @@
 						hide( context );
 						cancel( context );
 					} );
+					if ( typeof $.fn.onType !== 'undefined' ) {
+						$( this ).onType( function () {
+							update( context, true );
+						})
+					}
 				// Load suggestions if the value is changed because there are already
 				// typed characters before the JavaScript is loaded.
 				if ( $( this ).is( ':focus' ) && this.value !== this.defaultValue ) {
