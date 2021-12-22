@@ -2351,6 +2351,15 @@ class HookRunner implements
 		);
 	}
 
+	public function onLinkerMakeInternalLink( &$url, &$text, &$link, &$attribs,
+		$linkType
+	) {
+		return $this->container->run(
+			'LinkerMakeInternalLink',
+			[ &$url, &$text, &$link, &$attribs, $linkType ]
+		);
+	}
+
 	public function onLinkerMakeMediaLinkFile( $title, $file, &$html, &$attribs,
 		&$ret
 	) {

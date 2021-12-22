@@ -926,8 +926,8 @@ class Linker {
 		}
 
 		$link = '';
-		$success = Hooks::run( 'LinkerMakeInternalLink',
-			[ &$url, &$text, &$link, &$attribs, $linktype ] );
+		$success = Hooks::runner()->onLinkerMakeInternalLink(
+			$url, $text, $link, $attribs, $linktype );
 		if ( !$success ) {
 			wfDebug( "Hook LinkerMakeExternalLink changed the output of link "
 				. "with url {$url} and text {$text} to {$link}\n", true );
