@@ -999,12 +999,12 @@ class HookRunner implements
 		);
 	}
 
-	public function onBeforeParserFetchFileAndTitle( $parser, $nt, &$options,
+	public function onBeforeParserFetchFileAndTitle( $parser, &$nt, &$options,
 		&$descQuery
 	) {
 		return $this->container->run(
 			'BeforeParserFetchFileAndTitle',
-			[ $parser, $nt, &$options, &$descQuery ]
+			[ $parser, &$nt, &$options, &$descQuery ]
 		);
 	}
 
@@ -1014,6 +1014,13 @@ class HookRunner implements
 		return $this->container->run(
 			'BeforeParserFetchTemplateAndtitle',
 			[ $parser, $title, &$skip, &$id ]
+		);
+	}
+
+	public function onBeforeAddToGallery( &$title, &$html, &$alt, &$link, &$handlerOpts ) {
+		return $this->container->run(
+			'BeforeAddToGallery',
+			[ &$title, &$html, &$alt, &$link, &$handlerOpts ]
 		);
 	}
 
