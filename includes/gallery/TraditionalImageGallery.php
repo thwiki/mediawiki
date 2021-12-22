@@ -64,7 +64,7 @@ class TraditionalImageGallery extends ImageGalleryBase {
 		$out->addModuleStyles( 'mediawiki.page.gallery.styles' );
 		$output = Xml::openElement( 'ul', $attribs );
 		if ( $this->mCaption ) {
-			$output .= "\n\t<li class='gallerycaption'>{$this->mCaption}</li>";
+			$output .= "<li class='gallerycaption'>{$this->mCaption}</li>";
 		}
 
 		if ( $this->mShowFilename ) {
@@ -109,7 +109,7 @@ class TraditionalImageGallery extends ImageGalleryBase {
 
 			if ( !$img ) {
 				# We're dealing with a non-image, spit out the name and be done with it.
-				$thumbhtml = "\n\t\t\t" . '<div class="thumb" style="height: '
+				$thumbhtml = '<div class="thumb" style="height: '
 					. ( $this->getThumbPadding() + $this->mHeights ) . 'px;">'
 					. htmlspecialchars( $nt->getText() ) . '</div>';
 
@@ -120,7 +120,7 @@ class TraditionalImageGallery extends ImageGalleryBase {
 				$badFileLookup->isBadFile( $nt->getDBkey(), $this->getContextTitle() )
 			) {
 				# The image is blacklisted, just show it as a text link.
-				$thumbhtml = "\n\t\t\t" . '<div class="thumb" style="height: ' .
+				$thumbhtml = '<div class="thumb" style="height: ' .
 					( $this->getThumbPadding() + $this->mHeights ) . 'px;">' .
 					$linkRenderer->makeKnownLink( $nt, $nt->getText() ) .
 					'</div>';
@@ -128,7 +128,7 @@ class TraditionalImageGallery extends ImageGalleryBase {
 				$thumb = $img->transform( $transformOptions );
 				if ( !$thumb ) {
 					# Error generating thumbnail.
-					$thumbhtml = "\n\t\t\t" . '<div class="thumb" style="height: '
+					$thumbhtml = '<div class="thumb" style="height: '
 						. ( $this->getThumbPadding() + $this->mHeights ) . 'px;">'
 						. htmlspecialchars( $img->getLastError() ) . '</div>';
 				} else {
@@ -157,8 +157,7 @@ class TraditionalImageGallery extends ImageGalleryBase {
 					Linker::processResponsiveImages( $img, $thumb, $transformOptions );
 
 					# Set both fixed width and min-height.
-					$thumbhtml = "\n\t\t\t"
-						. '<div class="thumb" style="width: '
+					$thumbhtml = '<div class="thumb" style="width: '
 						. $this->getThumbDivWidth( $thumb->getWidth() ) . 'px;">'
 						# Auto-margin centering for block-level elements. Needed
 						# now that we have video handlers since they may emit block-
@@ -189,7 +188,7 @@ class TraditionalImageGallery extends ImageGalleryBase {
 			}
 			$meta = $lang->semicolonList( $meta );
 			if ( $meta ) {
-				$meta .= "<br />\n";
+				$meta .= '<br />';
 			}
 
 			$textlink = $this->mShowFilename ?
@@ -205,14 +204,14 @@ class TraditionalImageGallery extends ImageGalleryBase {
 			}
 			# Weird double wrapping (the extra div inside the li) needed due to FF2 bug
 			# Can be safely removed if FF2 falls completely out of existence
-			$output .= "\n\t\t" . '<li class="gallerybox" style="width: '
+			$output .= '<li class="gallerybox" style="width: '
 				. $gbWidth . '">'
 				. '<div style="width: ' . $gbWidth . '">'
 				. $thumbhtml
 				. $galleryText
-				. "\n\t\t</div></li>";
+				. '</div></li>';
 		}
-		$output .= "\n</ul>";
+		$output .= "</ul>";
 
 		return $output;
 	}
@@ -234,7 +233,7 @@ class TraditionalImageGallery extends ImageGalleryBase {
 				'class' => 'galleryfilename' .
 					( $this->getCaptionLength() === true ? ' galleryfilename-truncate' : '' )
 			]
-		) . "\n";
+		);
 	}
 
 	/**
@@ -251,9 +250,9 @@ class TraditionalImageGallery extends ImageGalleryBase {
 		# its absence, see: https://phabricator.wikimedia.org/T3765
 		# -Ævar
 
-		return "\n\t\t\t" . '<div class="gallerytext">' . "\n"
+		return '<div class="gallerytext">'
 			. $galleryText
-			. "\n\t\t\t</div>";
+			. '</div>';
 	}
 
 	/**
@@ -263,7 +262,7 @@ class TraditionalImageGallery extends ImageGalleryBase {
 	 * @return int
 	 */
 	protected function getThumbPadding() {
-		return 30;
+		return 10;
 	}
 
 	/**
