@@ -109,6 +109,10 @@ $namespaceNames = [
 	SMW_NS_CONCEPT_TALK  => '概念讨论',
 	NS_WIDGET            => 'Widget',
 	NS_WIDGET_TALK       => 'Widget讨论',
+	NS_USER_WIKI         => '用户Wiki',
+	NS_USER_WIKI_TALK    => '用户Wiki讨论',
+	NS_USER_PROFILE      => '用户资料',
+	NS_USER_PROFILE_TALK => '用户资料讨论',
 ];
 
 $namespaceAliases = [
