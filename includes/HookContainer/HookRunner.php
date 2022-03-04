@@ -1017,10 +1017,10 @@ class HookRunner implements
 		);
 	}
 
-	public function onBeforeAddToImageList( $file, &$result ) {
+	public function onBeforeAddToImageList( $imageListPager, $file, &$result ) {
 		return $this->container->run(
 			'BeforeAddToImageList',
-			[ $file, &$result ]
+			[ $imageListPager, $file, &$result ]
 		);
 	}
 
