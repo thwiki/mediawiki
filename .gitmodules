@@ -2,3 +2,227 @@
 	path = vendor
 	url = https://github.com/wikimedia/mediawiki-vendor.git
 	branch = REL1_35
+[submodule "extensions/Arrays"]
+	path = extensions/Arrays
+	url = https://github.com/wikimedia/mediawiki-extensions-Arrays.git
+	branch = REL1_35
+[submodule "extensions/CategorySortHeaders"]
+	path = extensions/CategorySortHeaders
+	url = https://github.com/wikimedia/mediawiki-extensions-CategorySortHeaders.git
+	branch = REL1_35
+[submodule "extensions/CategoryTree"]
+	path = extensions/CategoryTree
+	url = https://github.com/wikimedia/mediawiki-extensions-CategoryTree.git
+	branch = REL1_35
+[submodule "extensions/CharInsert"]
+	path = extensions/CharInsert
+	url = https://github.com/wikimedia/mediawiki-extensions-CharInsert.git
+	branch = REL1_35
+[submodule "extensions/CheckUser"]
+	path = extensions/CheckUser
+	url = https://github.com/wikimedia/mediawiki-extensions-CheckUser.git
+	branch = REL1_35
+[submodule "extensions/ChineseNumerals"]
+	path = extensions/ChineseNumerals
+	url = https://github.com/thwiki/mediawiki-extensions-ChineseNumerals.git
+	branch = REL1_35
+[submodule "extensions/CirrusSearch"]
+	path = extensions/CirrusSearch
+	url = https://github.com/thwiki/mediawiki-extensions-CirrusSearch.git
+	branch = REL1_35
+[submodule "extensions/Cite"]
+	path = extensions/Cite
+	url = https://github.com/wikimedia/mediawiki-extensions-Cite.git
+	branch = REL1_35
+[submodule "extensions/CiteThisPage"]
+	path = extensions/CiteThisPage
+	url = https://github.com/wikimedia/mediawiki-extensions-CiteThisPage.git
+	branch = REL1_35
+[submodule "extensions/ConfirmEdit"]
+	path = extensions/ConfirmEdit
+	url = https://github.com/wikimedia/mediawiki-extensions-ConfirmEdit.git
+	branch = REL1_35
+[submodule "extensions/ContributionScores"]
+	path = extensions/ContributionScores
+	url = https://github.com/wikimedia/mediawiki-extensions-ContributionScores.git
+	branch = REL1_35
+[submodule "extensions/Disambiguator"]
+	path = extensions/Disambiguator
+	url = https://github.com/wikimedia/mediawiki-extensions-Disambiguator.git
+	branch = REL1_35
+[submodule "extensions/Echo"]
+	path = extensions/Echo
+	url = https://github.com/wikimedia/mediawiki-extensions-Echo.git
+	branch = REL1_35
+[submodule "extensions/Editcount"]
+	path = extensions/Editcount
+	url = https://github.com/wikimedia/mediawiki-extensions-Editcount.git
+	branch = REL1_35
+[submodule "extensions/Elastica"]
+	path = extensions/Elastica
+	url = https://github.com/wikimedia/mediawiki-extensions-Elastica.git
+	branch = REL1_35
+[submodule "extensions/Flow"]
+	path = extensions/Flow
+	url = https://github.com/thwiki/mediawiki-extensions-Flow.git
+	branch = REL1_35
+[submodule "extensions/FlowThread"]
+	path = extensions/FlowThread
+	url = https://github.com/thwiki/mediawiki-extensions-FlowThread.git
+	branch = REL1_35
+[submodule "extensions/ForcePreview"]
+	path = extensions/ForcePreview
+	url = https://github.com/wikimedia/mediawiki-extensions-ForcePreview.git
+	branch = REL1_35
+[submodule "extensions/Gadgets"]
+	path = extensions/Gadgets
+	url = https://github.com/wikimedia/mediawiki-extensions-Gadgets.git
+	branch = REL1_35
+[submodule "extensions/ImageMap"]
+	path = extensions/ImageMap
+	url = https://github.com/wikimedia/mediawiki-extensions-ImageMap.git
+	branch = REL1_35
+[submodule "extensions/InputBox"]
+	path = extensions/InputBox
+	url = https://github.com/wikimedia/mediawiki-extensions-InputBox.git
+	branch = REL1_35
+[submodule "extensions/Interwiki"]
+	path = extensions/Interwiki
+	url = https://github.com/wikimedia/mediawiki-extensions-Interwiki.git
+	branch = REL1_35
+[submodule "extensions/LabeledSectionTransclusion"]
+	path = extensions/LabeledSectionTransclusion
+	url = https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion.git
+	branch = REL1_35
+[submodule "extensions/LanguageSelector"]
+	path = extensions/LanguageSelector
+	url = https://github.com/wikimedia/mediawiki-extensions-LanguageSelector.git
+	branch = REL1_35
+[submodule "extensions/LocalisationUpdate"]
+	path = extensions/LocalisationUpdate
+	url = https://github.com/wikimedia/mediawiki-extensions-LocalisationUpdate.git
+	branch = REL1_35
+[submodule "extensions/MediaContentRating"]
+	path = extensions/MediaContentRating
+	url = https://github.com/thwiki/mediawiki-extensions-MediaContentRating.git
+	branch = REL1_35
+[submodule "extensions/MultiBoilerplate"]
+	path = extensions/MultiBoilerplate
+	url = https://github.com/wikimedia/mediawiki-extensions-MultiBoilerplate.git
+	branch = REL1_35
+[submodule "extensions/MultimediaViewer"]
+	path = extensions/MultimediaViewer
+	url = https://github.com/wikimedia/mediawiki-extensions-MultimediaViewer.git
+	branch = REL1_35
+[submodule "extensions/Nuke"]
+	path = extensions/Nuke
+	url = https://github.com/wikimedia/mediawiki-extensions-Nuke.git
+	branch = REL1_35
+[submodule "extensions/OAuth"]
+	path = extensions/OAuth
+	url = https://github.com/thwiki/mediawiki-extensions-Oauth.git
+	branch = REL1_35
+[submodule "extensions/PageImages"]
+	path = extensions/PageImages
+	url = https://github.com/thwiki/mediawiki-extensions-PageImages.git
+	branch = REL1_35
+[submodule "extensions/PageNotice"]
+	path = extensions/PageNotice
+	url = https://github.com/thwiki/mediawiki-extensions-PageNotice.git
+	branch = REL1_35
+[submodule "extensions/ParserFunctions"]
+	path = extensions/ParserFunctions
+	url = https://github.com/wikimedia/mediawiki-extensions-ParserFunctions.git
+	branch = REL1_35
+[submodule "extensions/PdfHandler"]
+	path = extensions/PdfHandler
+	url = https://github.com/wikimedia/mediawiki-extensions-PdfHandler.git
+	branch = REL1_35
+[submodule "extensions/Poem"]
+	path = extensions/Poem
+	url = https://github.com/wikimedia/mediawiki-extensions-Poem.git
+	branch = REL1_35
+[submodule "extensions/Popups"]
+	path = extensions/Popups
+	url = https://github.com/wikimedia/mediawiki-extensions-Popups.git
+	branch = REL1_35
+[submodule "extensions/QRLite"]
+	path = extensions/QRLite
+	url = https://github.com/thwiki/mediawiki-extensions-QRLite.git
+	branch = REL1_35
+[submodule "extensions/RegexFun"]
+	path = extensions/RegexFun
+	url = https://github.com/wikimedia/mediawiki-extensions-RegexFun.git
+	branch = REL1_35
+[submodule "extensions/RelatedArticles"]
+	path = extensions/RelatedArticles
+	url = https://github.com/thwiki/mediawiki-extensions-RelatedArticles.git
+	branch = REL1_35
+[submodule "extensions/Renameuser"]
+	path = extensions/Renameuser
+	url = https://github.com/wikimedia/mediawiki-extensions-Renameuser.git
+	branch = REL1_35
+[submodule "extensions/ReplaceSet"]
+	path = extensions/ReplaceSet
+	url = https://github.com/wikimedia/mediawiki-extensions-ReplaceSet.git
+	branch = REL1_35
+[submodule "extensions/ReplaceText"]
+	path = extensions/ReplaceText
+	url = https://github.com/wikimedia/mediawiki-extensions-ReplaceText.git
+	branch = REL1_35
+[submodule "extensions/Score"]
+	path = extensions/Score
+	url = https://github.com/wikimedia/mediawiki-extensions-Score.git
+	branch = REL1_35
+[submodule "extensions/SemanticMediaWiki"]
+	path = extensions/SemanticMediaWiki
+	url = https://github.com/thwiki/mediawiki-extensions-SemanticMediaWiki.git
+	branch = REL1_35
+[submodule "extensions/SemanticResultFormats"]
+	path = extensions/SemanticResultFormats
+	url = https://github.com/thwiki/mediawiki-extensions-SemanticResultFormats.git
+	branch = REL1_35
+[submodule "extensions/SimpleMathJax"]
+	path = extensions/SimpleMathJax
+	url = https://github.com/thwiki/mediawiki-extensions-SimpleMathJax.git
+	branch = REL1_35
+[submodule "extensions/SocialProfile"]
+	path = extensions/SocialProfile
+	url = https://github.com/thwiki/mediawiki-extensions-SocialProfile.git
+	branch = REL1_35
+[submodule "extensions/SyntaxHighlight_GeSHi"]
+	path = extensions/SyntaxHighlight_GeSHi
+	url = https://github.com/wikimedia/mediawiki-extensions-SyntaxHighlight_GeSHi.git
+	branch = REL1_35
+[submodule "extensions/TextExtracts"]
+	path = extensions/TextExtracts
+	url = https://github.com/wikimedia/mediawiki-extensions-TextExtracts.git
+	branch = REL1_35
+[submodule "extensions/TitleBlacklist"]
+	path = extensions/TitleBlacklist
+	url = https://github.com/wikimedia/mediawiki-extensions-TitleBlacklist.git
+	branch = REL1_35
+[submodule "extensions/UrlGetParameters"]
+	path = extensions/UrlGetParameters
+	url = https://github.com/wikimedia/mediawiki-extensions-UrlGetParameters.git
+	branch = REL1_35
+[submodule "extensions/Variables"]
+	path = extensions/Variables
+	url = https://github.com/wikimedia/mediawiki-extensions-Variables.git
+	branch = REL1_35
+[submodule "extensions/VipsScaler"]
+	path = extensions/VipsScaler
+	url = https://github.com/wikimedia/mediawiki-extensions-VipsScaler.git
+	branch = REL1_35
+[submodule "extensions/Widgets"]
+	path = extensions/Widgets
+	url = https://github.com/wikimedia/mediawiki-extensions-Widgets.git
+	branch = REL1_35
+[submodule "extensions/WikiEditor"]
+	path = extensions/WikiEditor
+	url = https://github.com/wikimedia/mediawiki-extensions-WikiEditor.git
+	branch = REL1_35
+[submodule "extensions/YouTube"]
+	path = extensions/YouTube
+	url = https://github.com/wikimedia/mediawiki-extensions-YouTube.git
+	branch = REL1_35
