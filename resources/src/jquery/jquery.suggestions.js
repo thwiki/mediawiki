@@ -89,6 +89,15 @@
  */
 
 ( function () {
+	if (typeof $.fn.isSameVal === 'undefined') {
+		$.fn.isSameVal = function ( clear ) {
+			if ( this.data( 'isSameValOldVal' ) == null ) this.data( 'isSameValOldVal', '' );
+			if ( clear != null ) return this.data( 'isSameValOldVal', '' ) && false;
+			var r = this.data( 'isSameValOldVal' ) === this.val();
+			if ( !r ) this.data( 'isSameValOldVal', this.val() );
+			return r;
+		}
+	}
 	if (typeof $.fn.onType === 'undefined'){
 		$.fn.onType = (function (){
 			var events = ['keyup', 'click', 'focus', 'input', 'change', 'propertychange', 'selected', 'touch'];
