@@ -48,6 +48,9 @@ sftp-config.json
 /LocalSettings.php
 /includes/PlatformSettings.php
 /vendor
+album.php
+ajax.php
+ajax2.php
 
 # Building & testing
 npm-debug.log
@@ -81,9 +84,9 @@ Thumbs.db
 /favicon.ico
 /static*
 /tags
-/.htaccess
 /.htpasswd
 *.rej
+error_log
 
 # Docker
 docker-compose.override.yml
