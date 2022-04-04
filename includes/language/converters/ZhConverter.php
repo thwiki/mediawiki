@@ -56,7 +56,9 @@ class ZhConverter extends LanguageConverter {
 
 	protected function loadDefaultTables() {
 		$this->mTables = [
-			'zh' => new ReplacementArray
+			'zh-hans' => new ReplacementArray( MediaWiki\Languages\Data\ZhConversion::$zh2Hans ),
+			'zh-hant' => new ReplacementArray( MediaWiki\Languages\Data\ZhConversion::$zh2Hant ),
+			'zh' => new ReplacementArray,
 		];
 	}
 }

@@ -1173,8 +1173,8 @@ abstract class LanguageConverter implements ILanguageConverter {
 			return $text;
 		}
 
-		$ret = "-{R|$text}-";
-		return $ret;
+		//$ret = "-{R|$text}-";
+		return $text;
 	}
 
 	/**
