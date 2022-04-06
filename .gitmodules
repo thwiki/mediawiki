@@ -190,6 +190,10 @@
 	path = extensions/SyntaxHighlight_GeSHi
 	url = https://github.com/wikimedia/mediawiki-extensions-SyntaxHighlight_GeSHi.git
 	branch = REL1_35
+[submodule "extensions/TabberNeue"]
+	path = extensions/TabberNeue
+	url = https://github.com/thwiki/mediawiki-extensions-TabberNeue.git
+	branch = REL1_35
 [submodule "extensions/TextExtracts"]
 	path = extensions/TextExtracts
 	url = https://github.com/wikimedia/mediawiki-extensions-TextExtracts.git
