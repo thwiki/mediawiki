@@ -1,7 +1,3 @@
-[submodule "vendor"]
-	path = vendor
-	url = https://github.com/wikimedia/mediawiki-vendor.git
-	branch = REL1_35
 [submodule "extensions/Arrays"]
 	path = extensions/Arrays
 	url = https://github.com/wikimedia/mediawiki-extensions-Arrays.git
@@ -96,7 +92,7 @@
 	branch = REL1_35
 [submodule "extensions/LanguageSelector"]
 	path = extensions/LanguageSelector
-	url = https://github.com/wikimedia/mediawiki-extensions-LanguageSelector.git
+	url = https://github.com/thwiki/mediawiki-extensions-LanguageSelector.git
 	branch = REL1_35
 [submodule "extensions/LocalisationUpdate"]
 	path = extensions/LocalisationUpdate
@@ -225,4 +221,8 @@
 [submodule "extensions/YouTube"]
 	path = extensions/YouTube
 	url = https://github.com/wikimedia/mediawiki-extensions-YouTube.git
+	branch = REL1_35
+[submodule "vendor"]
+	path = vendor
+	url = https://github.com/thwiki/mediawiki-vendor.git
 	branch = REL1_35

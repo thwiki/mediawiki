@@ -47,7 +47,6 @@ sftp-config.json
 /maintenance/dev/data
 /LocalSettings.php
 /includes/PlatformSettings.php
-/vendor
 album.php
 ajax.php
 ajax2.php
