@@ -117,7 +117,6 @@ class ApiOpenSearch extends ApiBase {
 	 *  Note that phan annotations don't support keys containing a space.
 	 */
 	private function search( $search, array $params ) {
-		$params['backend'] = SearchMySQL::class;
 		$searchEngine = $this->buildSearchEngine( $params );
 		$titles = $searchEngine->extractTitles( $searchEngine->completionSearchWithVariants( $search ) );
 		$results = [];

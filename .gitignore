@@ -46,6 +46,7 @@ sftp-config.json
 /maintenance/.mwsql_history
 /maintenance/dev/data
 /LocalSettings.php
+/settings/secrets
 /includes/PlatformSettings.php
 album.php
 ajax.php
