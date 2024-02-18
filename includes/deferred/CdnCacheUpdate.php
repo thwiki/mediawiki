@@ -289,8 +289,7 @@ class CdnCacheUpdate implements DeferrableUpdate, MergeableUpdate {
 	 * @throws Exception
 	 */
 	private static function naivePurge( array $urls ) {
-		global $wgCdnServers;
-
+		global $wgCdnServers, $wgCdnServersNoPurge, $wgCdnServersPurgeExtraHeaders;
 		$reqs = [];
 		foreach ( $urls as $url ) {
 			$url = self::expand( $url );
@@ -298,6 +297,9 @@ class CdnCacheUpdate implements DeferrableUpdate, MergeableUpdate {
 			$urlHost = strlen( $urlInfo['port'] ?? null )
 				? IP::combineHostAndPort( $urlInfo['host'], $urlInfo['port'] )
 				: $urlInfo['host'];
+			if ( in_array( $urlHost, [ 'thwiki.cc' ] )) {
+				continue;
+			}
 			$baseReq = [
 				'method' => 'PURGE',
 				'url' => $url,
@@ -306,10 +308,12 @@ class CdnCacheUpdate implements DeferrableUpdate, MergeableUpdate {
 					'Connection' => 'Keep-Alive',
 					'Proxy-Connection' => 'Keep-Alive',
 					'User-Agent' => 'MediaWiki/' . MW_VERSION . ' ' . __CLASS__
-				]
+				] + $wgCdnServersPurgeExtraHeaders
 			];
 			foreach ( $wgCdnServers as $server ) {
-				$reqs[] = ( $baseReq + [ 'proxy' => $server ] );
+				if ( !in_array( $server, $wgCdnServersNoPurge ) ){
+					$reqs[] = ( $baseReq + [ 'host' => $urlHost, 'proxy' => $server ] );
+				}
 			}
 		}
 
