@@ -6,6 +6,19 @@ if (!defined('MEDIAWIKI')) {
 	exit;
 }
 
+# Add flags to database connection
+$wgDBservers = [
+	[
+		'host' => $wgDBserver,
+		'dbname' => $wgDBname,
+		'user' => $wgDBuser,
+		'password' => $wgDBpassword,
+		'type' => $wgDBtype,
+		'flags' => DBO_DEFAULT | DBO_PERSISTENT, // | DBO_COMPRESS,
+		'load' => 0,
+	],
+];
+
 # MySQL specific settings
 $wgDBprefix = "";
 

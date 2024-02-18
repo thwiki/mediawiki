@@ -28,7 +28,7 @@ $wgSidebarCacheExpiry = 3600; // 缓存1小时
 #资源缓存过期时间
 $wgResourceLoaderMaxage = [
 	'versioned' => 3600 * 24 * 30, // 30 days
-	'unversioned' => 3600 * 24, // 24 hours
+	'unversioned' => 3600 * 5, // 5 hours
 ];
 
 # File Cache设定

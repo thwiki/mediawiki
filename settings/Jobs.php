@@ -15,5 +15,12 @@ $wgJobTypeConf = [
 ];
 
 $wgJobTypesExcludedFromDefaultQueue = [
-	//'SMW\RefreshJob', 'cirrusSearchMassIndex', //'cirrusSearchElasticaWrite',
+	//'refreshLinks',
+	//'cirrusSearchLinksUpdatePrioritized',
+	//'htmlCacheUpdate',
+	//'recentChangesUpdate',
+	//'smw.changePropagationClassUpdate',
+	//'SMW\RefreshJob',
+	//'cirrusSearchMassIndex',
+	//'cirrusSearchElasticaWrite',
 ];

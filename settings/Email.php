@@ -16,7 +16,7 @@ $wgEnableUserEmail = true;
 $wgEmergencyContact = "tech@thwiki.cc";
 
 ## 找回密码发送邮箱
-$wgPasswordSender = "down@thwiki.cc";
+$wgPasswordSender = "admin@mail.thwiki.cc";
 
 ## 创建用户讨论时通知用户
 $wgEnotifUserTalk = false; # 用户自行设定
