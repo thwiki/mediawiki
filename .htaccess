@@ -1,8 +1,5 @@
 Options -Indexes
 
-Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-Header set Content-Security-Policy "default-src https: 'unsafe-inline'; script-src https: 'unsafe-inline' 'unsafe-eval'; img-src https: data: blob:; font-src https: data: blob:; media-src *"
-
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -15,6 +12,3 @@ RewriteRule ^(.+)$ /index.php?title=$1 [L,QSA]
 
 RewriteCond %{REQUEST_FILENAME} !\.php$
 RewriteRule ^([^/]+)/?$ /index.php?title=$1 [L,QSA]
-
-RewriteCond %{HTTP:Authorization} ^(.+)
-RewriteRule .+ - [e=HTTP_AUTHORIZATION:%1,L,QSA]
