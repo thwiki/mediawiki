@@ -55,7 +55,7 @@ $wgAllowExternalImages = true;
 $wgAllowCopyUploads = true;
 $wgCopyUploadsFromSpecialUpload = true;
 $wgAllowImageTag = false; //Allow <img> tag to be used in wikitext
-$wgFileExtensions = ['png', 'gif', 'jpg', 'jpeg', 'pdf', 'mid', 'midi', 'ogg', 'mp3', 'svg']; // 'ico'存在跨站攻击风险
+$wgFileExtensions = ['png', 'gif', 'jpg', 'jpeg', 'pdf', 'mid', 'midi', 'mp3', 'svg', 'webp']; // 'ico'存在跨站攻击风险
 $wgAllowTitlesInSVG = false;
 #将图片与wiki源程序分开，并使用不同的域名
 $wgUploadDirectory = "${IP}_upload"; //图片被上传到的绝对路径
@@ -64,7 +64,7 @@ $wgUploadPath = "https://upload.thwiki.cc"; //图片相对URL路径
 # InstantCommons allows wiki to use images from http://commons.wikimedia.org
 $wgUseInstantCommons = true;
 $wgCommonsMetadataForceRecalculate = true;
-
+$wgNativeImageLazyLoading = true;
 
 ## For attaching licensing metadata to pages, and displaying an
 ## appropriate copyright notice / icon. GNU Free Documentation
@@ -72,13 +72,15 @@ $wgCommonsMetadataForceRecalculate = true;
 $wgRightsPage = ""; # Set to the title of a wiki page that describes your license/copyright
 $wgRightsUrl = "https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh";
 $wgRightsText = "";
-$wgRightsIcon = "https://upload.thwiki.cc/common/CC-BY-NC-SA88x31.png";
+$wgRightsIcon = "https://static.thwiki.cc/common/CC-BY-NC-SA88x31.png";
 
 #底部图标
 $wgFooterIcons['poweredby']['myicon'] = [
-	"src" => "https://thwiki.cc/banner/banner_b0.png",
+	"src" => "https://static.thwiki.cc/banner/banner_b0.png",
+	"srcset" => "https://static.thwiki.cc/banner/banner_b0@2x.png 2x",
 	"url" => "https://thwiki.cc/",
 	"alt" => "由TBSGroup建立的专业性东方Project维基百科",
 ];
 
 $wgShowExceptionDetails = true;
+$wgAjaxEditStash = false;

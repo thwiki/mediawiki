@@ -7,7 +7,7 @@ if (!defined('MEDIAWIKI')) {
 }
 
 # Semantic MediaWiki
-wfLoadExtension( 'SemanticMediaWiki' );
+wfLoadExtension('SemanticMediaWiki');
 enableSemantics('thwiki.cc');
 #$smwgCacheType = CACHE_MEMCACHED;
 #$smwgMainCacheType = CACHE_MEMCACHED;
@@ -32,6 +32,8 @@ $smwgQMaxInlineLimit = 5000; // Max Inline Rows
 $smwgQUpperbound = 20000; // Max Offset
 $smwgQPrintoutLimit = 100; // Max Printouts
 $smwgBrowseFeatures = $smwgBrowseFeatures | SMW_BROWSE_SHOW_INVERSE;
+
+//$smwgChangePropagationProtection = false;
 
 $smwgNamespacesWithSemanticLinks = [
 	NS_MAIN => true,

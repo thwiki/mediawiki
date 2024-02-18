@@ -88,6 +88,13 @@ $wgVipsOptions = [
 		'sharpen' => false,
 		'bilinear' => false,
 	],
+	[
+		'conditions' => [
+			'mimeType' => 'image/webp',
+		],
+		'sharpen' => false,
+		'bilinear' => false,
+	],
 ];
 
 require_once "$IP/extensions/Achievements/Achievements.php";
@@ -129,7 +136,6 @@ $wgCollisionRank = [
 	'物品' => 9,
 	'相关作品' => 10,
 	'商业游戏' => 10,
-	'展会' => 10,
 	'活动' => 10,
 	'同人角色' => 11,
 	'公司会社' => 12,
@@ -137,14 +143,13 @@ $wgCollisionRank = [
 	'人物' => 13,
 	'同人软件' => 14,
 	'同人游戏' => 14,
-	'同人软件' => 14,
-	'同人专辑' => 14,
-	'同人志' => 14,
-	'同人视频' => 14,
-	'模型周边' => 14,
-	'周边' => 15,
-	'其他同人作品' => 15,
-	'列表外词条' => 16,
+	'同人专辑' => 15,
+	'同人志' => 15,
+	'同人视频' => 15,
+	'模型周边' => 15,
+	'周边' => 16,
+	'其他同人作品' => 17,
+	'列表外词条' => 18,
 ];
 
 //wfLoadExtension( 'ContributionScores' );
@@ -158,7 +163,7 @@ $wgContribScoreReports = [[7, 15], [30, 25], [0, 50]];
 
 wfLoadExtension('Disambiguator');
 
-wfLoadExtension( 'DurationExtension' );
+wfLoadExtension('DurationExtension');
 
 wfLoadExtension('Echo');
 $wgEchoShowFullNotificationsLink = true;
@@ -169,15 +174,19 @@ wfLoadExtension('Editcount');
 
 wfLoadExtension('Elastica');
 wfLoadExtension('CirrusSearch');
+$wgCirrusSearchClusters = [
+	'default' => ['localhost'],
+];
 #$wgCirrusSearchIndexBaseName = 'thwikicc_wiki';
 $wgDisableSearchUpdate = false;
-$wgDebugLogGroups['CirrusSearch'] = [
-	'destination' => "$IP/error_log",
-	'level' => 'warning',
-];
+/*$wgDebugLogGroups['CirrusSearch'] = [
+'destination' => "$IP/error_log",
+'level' => 'warning',
+];*/
 $wgSearchType = 'CirrusSearch';
 $wgSearchTypeAlternatives = [SearchMySQL::class];
 $wgCirrusSearchClientSideUpdateTimeout = 60;
+$wgCirrusSearchMoreLikeThisTTL = 86400 * 7; // Cache more like results for 7 days
 
 require_once "$IP/extensions/FixedHeader/FixedHeader.php";
 
@@ -185,8 +194,8 @@ wfLoadExtension('Flow');
 $wgFlowContentFormat = 'html';
 
 wfLoadExtension('FlowThread');
-$wgFlowThreadConfig['AnonymousAvatar'] = 'https://upload.thwiki.cc/avatars/default_l.jpg';
-$wgFlowThreadConfig['Avatar'] = 'https://upload.thwiki.cc/avatars/thwikicc_wiki_${userid}_l.jpg';
+$wgFlowThreadConfig['AnonymousAvatar'] = 'https://avatar.thwiki.cc/default_ml.jpg';
+$wgFlowThreadConfig['Avatar'] = 'https://avatar.thwiki.cc/thwikicc_wiki_${userid}_ml.jpg';
 $wgFlowThreadConfig['MaxNestLevel'] = 3;
 $wgFlowThreadConfig['PopularPostCount'] = 3;
 $wgFlowThreadConfig['PopularPostThreshold'] = 3;
@@ -233,7 +242,9 @@ $wgMultiBoilerplateOptions["官方原曲"] = "模板:页面模板/原曲页面";
 $wgMultiBoilerplateOptions["官方场景"] = "模板:页面模板/官方场景";
 $wgMultiBoilerplateOptions["符卡页面"] = "模板:页面模板/符卡页面";
 $wgMultiBoilerplateOptions["东方关联人物"] = "模板:页面模板/东方关联人物";
-$wgMultiBoilerplateOptions["同人曲目评分"] = "模板:页面模板/同人曲目评分";
+//$wgMultiBoilerplateOptions["同人曲目评分"] = "模板:页面模板/同人曲目评分";
+$wgMultiBoilerplateOptions["游戏对话"] = "模板:页面模板/游戏对话";
+$wgMultiBoilerplateOptions["活动摊位列表"] = "模板:页面模板/活动摊位列表";
 
 wfLoadExtension('MultimediaViewer');
 $wgMediaViewerEnableByDefault = true;
@@ -293,6 +304,8 @@ wfLoadExtension('ReplaceText');
 //$wgScoreTrim = false; //true Set to false if you don't want score trimming
 
 require_once "$IP/extensions/SocialProfile/SocialProfile.php";
+//Avatar
+$wgAvatarPath = 'https://avatar.thwiki.cc/';
 //Friends/Foes
 $wgUserProfileDisplay['friends'] = true;
 $wgUserProfileDisplay['foes'] = true;
@@ -323,21 +336,24 @@ wfLoadExtension('TabberNeue');
 
 require_once "$IP/extensions/TableMapping/TableMapping.php";
 
-wfLoadExtension( 'TemplateStyles' );
+//wfLoadExtension('TailwindCSS');
+$wgTailwindCSSStyleBuilderServer = 'localhost:8067';
+
+wfLoadExtension('TemplateStyles');
 
 $wgTemplateStylesAllowedUrls = [
 	"audio" => [
-			"<^https://upload\\.thwiki\\.cc/>"
+		"<^https://upload\\.thwiki\\.cc/>"
 	],
 	"image" => [
-			"<^https://upload\\.thwiki\\.cc/>"
+		"<^https://upload\\.thwiki\\.cc/>"
 	],
 	"svg" => [
-			"<^https://upload\\.thwiki\\.cc/[^?#]*\\.svg(?:[?#]|$)>"
+		"<^https://upload\\.thwiki\\.cc/[^?#]*\\.svg(?:[?#]|$)>"
 	],
 	"font" => [],
 	"namespace" => [
-			"<.>"
+		"<.>"
 	],
 	"css" => []
 ];
