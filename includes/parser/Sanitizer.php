@@ -168,7 +168,7 @@ class Sanitizer {
 				'b', 'bdi', 'del', 'i', 'ins', 'u', 'font', 'big', 'small', 'sub', 'sup', 'h1',
 				'h2', 'h3', 'h4', 'h5', 'h6', 'cite', 'code', 'em', 's',
 				'strike', 'strong', 'tt', 'var', 'div', 'center',
-				'blockquote', 'ol', 'ul', 'dl', 'table', 'caption', 'pre',
+				'blockquote', 'ol', 'ul', 'dl', 'table', 'tbody', 'thead', 'tfoot', 'caption', 'pre',
 				'ruby', 'rb', 'rp', 'rt', 'rtc', 'p', 'span', 'abbr', 'dfn',
 				'kbd', 'samp', 'data', 'time', 'mark'
 			];
@@ -189,7 +189,7 @@ class Sanitizer {
 			];
 
 			$htmlnest = [ # Tags that can be nested--??
-				'table', 'tr', 'td', 'th', 'div', 'blockquote', 'ol', 'ul',
+				'table', 'tbody', 'thead', 'tfoot', 'tr', 'td', 'th', 'div', 'blockquote', 'ol', 'ul',
 				'li', 'dl', 'dt', 'dd', 'font', 'big', 'small', 'sub', 'sup', 'span',
 				'var', 'kbd', 'samp', 'em', 'strong', 'q', 'ruby', 'bdo'
 			];

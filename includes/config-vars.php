@@ -1692,6 +1692,12 @@ $wgCdnServers = null;
 $wgCdnServersNoPurge = null;
 
 /**
+ * Config variable stub for the CdnServersPurgeExtraHeaders setting, for use by phpdoc and IDEs.
+ * @see MediaWiki\MainConfigSchema::CdnServersPurgeExtraHeaders
+ */
+$wgCdnServersPurgeExtraHeaders = null;
+
+/**
  * Config variable stub for the SquidPurgeUseHostHeader setting, for use by phpdoc and IDEs.
  * @see MediaWiki\MainConfigSchema::SquidPurgeUseHostHeader
  * @deprecated since 1.33

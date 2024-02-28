@@ -203,7 +203,7 @@ class MovePageForm extends UnlistedSpecialPage {
 		$this->reason = $request->getText( 'wpReason' );
 		$this->moveTalk = $request->getBool( 'wpMovetalk', $def );
 		$this->fixRedirects = $request->getBool( 'wpFixRedirects', $def );
-		$this->leaveRedirect = $request->getBool( 'wpLeaveRedirect', $def );
+		$this->leaveRedirect = $request->getBool( 'wpLeaveRedirect', $def && !$user->getOption( 'ap-prefs-not-dcr' ) );
 		// T222953: Tick the "move subpages" box by default
 		$this->moveSubpages = $request->getBool( 'wpMovesubpages', $def );
 		$this->deleteAndMove = $request->getBool( 'wpDeleteAndMove' );

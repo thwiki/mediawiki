@@ -66,7 +66,7 @@ class TraditionalImageGallery extends ImageGalleryBase {
 		$parserOutput->addModuleStyles( [ 'mediawiki.page.gallery.styles' ] );
 		$output = Xml::openElement( 'ul', $attribs );
 		if ( $this->mCaption ) {
-			$output .= "\n\t<li class='gallerycaption'>{$this->mCaption}</li>";
+			$output .= "<li class='gallerycaption'>{$this->mCaption}</li>";
 		}
 
 		if ( $this->mShowFilename ) {
@@ -143,7 +143,7 @@ class TraditionalImageGallery extends ImageGalleryBase {
 					$thumbhtml = Html::rawElement( 'span', [ 'typeof' => $rdfaType ], $thumbhtml );
 				}
 
-				$thumbhtml = "\n\t\t\t" . '<div class="thumb" style="height: '
+				$thumbhtml = '<div class="thumb" style="height: '
 					. ( $this->getThumbPadding() + $this->mHeights ) . 'px;">'
 					. $thumbhtml . '</div>';
 
@@ -199,7 +199,7 @@ class TraditionalImageGallery extends ImageGalleryBase {
 				# Set both fixed width and min-height.
 				$width = $this->getThumbDivWidth( $thumb->getWidth() );
 				$height = $this->getThumbPadding() + $this->mHeights;
-				$thumbhtml = "\n\t\t\t" . Html::rawElement( 'div', [
+				$thumbhtml = Html::rawElement( 'div', [
 					'class' => 'thumb',
 					'style' => "width: {$width}px;" .
 						( !$enableLegacyMediaDOM && $this->mMode === 'traditional' ?
@@ -231,7 +231,7 @@ class TraditionalImageGallery extends ImageGalleryBase {
 			}
 			$meta = $lang->semicolonList( $meta );
 			if ( $meta ) {
-				$meta .= "<br />\n";
+				$meta .= '<br />';
 			}
 
 			$textlink = $this->mShowFilename ?
@@ -243,16 +243,15 @@ class TraditionalImageGallery extends ImageGalleryBase {
 			$gbWidth = $this->getGBWidthOverwrite( $thumb ) ?: $this->getGBWidth( $thumb ) . 'px';
 			# Weird double wrapping (the extra div inside the li) needed due to FF2 bug
 			# Can be safely removed if FF2 falls completely out of existence
-			$output .= "\n\t\t" . '<li class="gallerybox" style="width: '
+			$output .= '<li class="gallerybox" style="width: '
 				. $gbWidth . '">'
 				. ( $enableLegacyMediaDOM ? '<div style="width: ' . $gbWidth . '">' : '' )
 				. $thumbhtml
 				. $galleryText
-				. "\n\t\t"
 				. ( $enableLegacyMediaDOM ? '</div>' : '' )
-				. "</li>";
+				. '</li>';
 		}
-		$output .= "\n</ul>";
+		$output .= '</ul>';
 
 		return $output;
 	}
@@ -274,7 +273,7 @@ class TraditionalImageGallery extends ImageGalleryBase {
 				'class' => 'galleryfilename' .
 					( $this->getCaptionLength() === true ? ' galleryfilename-truncate' : '' )
 			]
-		) . "\n";
+		);
 	}
 
 	/**
@@ -291,9 +290,9 @@ class TraditionalImageGallery extends ImageGalleryBase {
 		# its absence, see: https://phabricator.wikimedia.org/T3765
 		# -Ævar
 
-		return "\n\t\t\t" . '<div class="gallerytext">' . "\n"
+		return '<div class="gallerytext">'
 			. $galleryText
-			. "\n\t\t\t</div>";
+			. '</div>';
 	}
 
 	/**
@@ -303,7 +302,7 @@ class TraditionalImageGallery extends ImageGalleryBase {
 	 * @return int
 	 */
 	protected function getThumbPadding() {
-		return 30;
+		return 10;
 	}
 
 	/**

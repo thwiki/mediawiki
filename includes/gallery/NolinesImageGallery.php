@@ -28,10 +28,14 @@ class NolinesImageGallery extends TraditionalImageGallery {
 
 	protected function getGBBorders() {
 		// This accounts for extra space between <li> elements.
-		return 4;
+		return 0;
 	}
 
 	protected function getVPad( $boxHeight, $thumbHeight ) {
 		return 0;
+	}
+
+	protected function getGBPadding() {
+		return 2;
 	}
 }

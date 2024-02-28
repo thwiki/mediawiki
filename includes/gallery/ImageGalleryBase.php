@@ -295,8 +295,10 @@ abstract class ImageGalleryBase extends ContextSource {
 			// Old calling convention
 			$title = $title->getTitle();
 		}
-		$this->mImages[] = [ $title, $html, $alt, $link, $handlerOpts, $loading, $imageOptions ];
-		wfDebug( 'ImageGallery::add ' . $title->getText() );
+		if ( Hooks::runner()->onBeforeAddToGallery( $title, $html, $alt, $link, $handlerOpts ) ) {
+			$this->mImages[] = [ $title, $html, $alt, $link, $handlerOpts, $loading, $imageOptions ];
+			wfDebug( 'ImageGallery::add ' . $title->getText() );
+		}
 	}
 
 	/**
@@ -324,7 +326,9 @@ abstract class ImageGalleryBase extends ContextSource {
 			// Old calling convention
 			$title = $title->getTitle();
 		}
-		array_unshift( $this->mImages, [ &$title, $html, $alt, $link, $handlerOpts, $loading, $imageOptions ] );
+		if ( Hooks::runner()->onBeforeAddToGallery( $title, $html, $alt, $link, $handlerOpts ) ) {
+			array_unshift( $this->mImages, [ &$title, $html, $alt, $link, $handlerOpts, $loading, $imageOptions ] );
+		}
 	}
 
 	/**

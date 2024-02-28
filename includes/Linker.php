@@ -347,12 +347,21 @@ class Linker {
 			$classes[] = 'mw-default-size';
 		}
 
-		$prefix = $postfix = '';
+		if ( isset( $frameParams['prefix'] ) ) {
+			$prefix = $frameParams['prefix'];
+		} else {
+			$prefix = '';
+		}
+		if ( isset( $frameParams['postfix'] ) ) {
+			$postfix = $frameParams['postfix'];
+		} else {
+			$postfix = '';
+		}
 
 		if ( $enableLegacyMediaDOM ) {
 			if ( $frameParams['align'] == 'center' ) {
-				$prefix = '<div class="center">';
-				$postfix = '</div>';
+				$prefix = $prefix . '<div class="center">';
+				$postfix = '</div>' . $postfix;
 				$frameParams['align'] = 'none';
 			}
 		}
@@ -1094,6 +1103,49 @@ class Linker {
 		if ( !$success ) {
 			wfDebug( "Hook LinkerMakeExternalLink changed the output of link "
 				. "with url {$url} and text {$text} to {$link}" );
+			return $link;
+		}
+		$attribs['href'] = $url;
+		return Html::rawElement( 'a', $attribs, $text );
+	}
+
+	/**
+	 * Make an internal link
+	 *
+	 * @author thwiki
+	 * @param string $url URL to link to
+	 * @param-taint $url escapes_html
+	 * @param string $text Text of link
+	 * @param-taint $text escapes_html
+	 * @param bool $escape Do we escape the link text?
+	 * @param-taint $escape none
+	 * @param string $linktype Type of external link. Gets added to the classes
+	 * @param-taint $linktype escapes_html
+	 * @param array $attribs Array of extra attributes to <a>
+	 * @param-taint $attribs escapes_html
+	 * @param LinkTarget|null $title LinkTarget object used for title specific link attributes
+	 * @param-taint $title none
+	 * @return string
+	 */
+	public static function makeInternalLink( $url, $text, $escape = true,
+		$linktype = '', $attribs = [], $title = null
+	) {
+		$class = '';
+		if ( isset( $attribs['class'] ) && $attribs['class'] ) {
+			$class .= " {$attribs['class']}";
+		}
+		$attribs['class'] = $class;
+
+		if ( $escape ) {
+			$text = htmlspecialchars( $text, ENT_COMPAT );
+		}
+
+		$link = '';
+		$success = Hooks::runner()->onLinkerMakeInternalLink(
+			$url, $text, $link, $attribs, $linktype );
+		if ( !$success ) {
+			wfDebug( "Hook LinkerMakeInternalLink changed the output of link "
+				. "with url {$url} and text {$text} to {$link}\n", true );
 			return $link;
 		}
 		$attribs['href'] = $url;

@@ -147,9 +147,9 @@ class SpecialUpload extends SpecialPage {
 		$this->mForReUpload = $request->getBool( 'wpForReUpload' ); // updating a file
 
 		$commentDefault = '';
-		$commentMsg = $this->msg( 'upload-default-description' )->inContentLanguage();
+		$commentMsg = $this->msg( 'upload-default-description', [ $this->mDesiredDestName ] )->inContentLanguage();
 		if ( !$this->mForReUpload && !$commentMsg->isDisabled() ) {
-			$commentDefault = $commentMsg->plain();
+			$commentDefault = $commentMsg->parse();
 		}
 		$this->mComment = $request->getText( 'wpUploadDescription', $commentDefault );
 

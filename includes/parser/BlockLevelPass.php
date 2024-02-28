@@ -110,6 +110,26 @@ class BlockLevelPass {
 	}
 
 	/**
+	 * Normalize prefix character
+	 *
+	 * @param string $st1
+	 * @param string $st2
+	 *
+	 * @return int
+	 */
+	public function normalizePrefix( $prefix ) {
+		return strtr( $prefix,
+			[
+				'*b'=>'*', // blue bullet, same as normal '*'
+				'*d'=>'d', // disc bullet
+				'*c'=>'c', // circle bullet
+				'*s'=>'s', // square bullet
+				'*x'=>'x', // cross bullet
+			]
+		);
+	}
+
+	/**
 	 * Open the list item element identified by the prefix character.
 	 *
 	 * @param string $char
@@ -128,6 +148,8 @@ class BlockLevelPass {
 		} elseif ( $char === ';' ) {
 			$result .= "<dl><dt>";
 			$this->DTopen = true;
+		} elseif ( strpos( 'dcsx', $char ) !== false ) {
+			$result .= "<ul><li class=\"$char\">";
 		} else {
 			$result = '<!-- ERR 1 -->';
 		}
@@ -156,6 +178,8 @@ class BlockLevelPass {
 				$this->DTopen = false;
 				return $close . '<dd>';
 			}
+		} elseif ( strpos( 'dcsx', $char ) !== false ) {
+			return "</li>\n<li class=\"$char\">";
 		}
 		return '<!-- ERR 2 -->';
 	}
@@ -167,7 +191,7 @@ class BlockLevelPass {
 	 * @return string
 	 */
 	private function closeList( $char ) {
-		if ( $char === '*' ) {
+		if ( $char === '*' || strpos( 'dcsx', $char ) !== false ) {
 			$text = "</li></ul>";
 		} elseif ( $char === '#' ) {
 			$text = "</li></ol>";
@@ -223,15 +247,18 @@ class BlockLevelPass {
 			# If not in a <pre> element, scan for and figure out what prefixes are there.
 			if ( !$this->inPre ) {
 				# Multiple prefixes may abut each other for nested lists.
-				$prefixLength = strspn( $inputLine, '*#:;' );
-				$prefix = substr( $inputLine, 0, $prefixLength );
+				$prefix = null;
+				preg_match( '/^(\*([bdcsx](?=$| |\*|#|:|;))?|#|:|;)*/u', $inputLine, $prefix );
+				$prefix = !is_null( $prefix ) && isset( $prefix[0] ) ? $prefix[0] : '';
+				$t = substr( $inputLine, strlen( $prefix ) );
+				$prefix = self::normalizePrefix( $prefix );
+				$prefixLength = strlen( $prefix );
 
 				# eh?
 				# ; and : are both from definition-lists, so they're equivalent
 				#  for the purposes of determining whether or not we need to open/close
 				#  elements.
-				$prefix2 = str_replace( ';', ':', $prefix );
-				$t = substr( $inputLine, $prefixLength );
+				$prefix2 = strtr( $prefix, ';dcsx', ':****' );
 				$this->inPre = (bool)$preOpenMatch;
 			} else {
 				# Don't interpret any other prefixes in preformatted text

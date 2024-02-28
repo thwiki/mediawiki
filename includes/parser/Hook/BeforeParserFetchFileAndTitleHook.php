@@ -26,7 +26,7 @@ interface BeforeParserFetchFileAndTitleHook {
 	 * @param string &$descQuery Query string to add to thumbnail URL
 	 * @return bool|void True or no return value to continue or false to abort
 	 */
-	public function onBeforeParserFetchFileAndTitle( $parser, $nt, &$options,
+	public function onBeforeParserFetchFileAndTitle( $parser, &$nt, &$options,
 		&$descQuery
 	);
 }

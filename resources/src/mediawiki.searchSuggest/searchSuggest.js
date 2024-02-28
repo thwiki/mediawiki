@@ -32,12 +32,15 @@
 		request: function ( api, query, response, maxRows, namespace ) {
 			return api.get( {
 				formatversion: 2,
+				redirects: 'display',
 				action: 'opensearch',
 				search: query,
 				namespace: namespace || searchNS,
 				limit: maxRows
 			} ).done( function ( data, jqXHR ) {
-				response( data[ 1 ], {
+				data.shift();
+				var transpose = data[0].map(function(_,i){return data.map(function(r){return r[i];});});
+				response( transpose, {
 					type: jqXHR.getResponseHeader( 'X-OpenSearch-Type' ),
 					searchId: jqXHR.getResponseHeader( 'X-Search-ID' ),
 					query: query
@@ -194,7 +197,10 @@
 		}
 
 		// The function used to render the suggestions.
-		function renderFunction( text, context ) {
+		function renderFunction( data, context ) {
+			var text = data[0],
+				desc = data[1],
+				link = data[2];
 			var formData = getFormData( context ),
 				textboxConfig = context.data.$textbox.data( 'mw-searchsuggest' ) || {};
 
@@ -210,13 +216,15 @@
 			} );
 
 			// this is the container <div>, jQueryfied
-			this.text( text );
+			this.append( $( '<div>', { class: 'suggestions-text' } ).text( text ) );
+			this.append( $( '<div>', { class: 'suggestions-desc' } ).text( desc ) );
+			this.data( 'text', text );
 
 			// wrap only as link, if the config doesn't disallow it
 			if ( textboxConfig.wrapAsLink !== false ) {
 				this.wrap(
 					$( '<a>' )
-						.attr( 'href', formData.baseHref + $.param( formData.linkParams ) )
+						.attr( 'href', link )
 						.attr( 'title', text )
 						.addClass( 'mw-searchSuggest-link' )
 				);
@@ -321,7 +329,8 @@
 					after: onAfterUpdate
 				},
 				cache: true,
-				highlightInput: true
+				highlightInput: true,
+				maxRows: 12
 			} )
 			.on( 'paste cut drop', function () {
 				// make sure paste and cut events from the mouse and drag&drop events

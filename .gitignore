@@ -48,9 +48,11 @@ sftp-config.json
 /LocalSettings.php
 /settings/secrets
 /includes/PlatformSettings.php
+/vendor
 album.php
 ajax.php
 ajax2.php
+/lockdown-*
 
 # Building & testing
 npm-debug.log

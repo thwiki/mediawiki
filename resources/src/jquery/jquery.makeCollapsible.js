@@ -303,7 +303,7 @@
 
 					// If the table has a caption, collapse to the caption
 					// as opposed to the first row
-					var $caption = $collapsible.find( '> caption' );
+					var $caption = $collapsible.find( '> .mw-collapsible-caption, > caption' ).first();
 					if ( $caption.length ) {
 						$toggle = $caption.find( '> .mw-collapsible-toggle' );
 

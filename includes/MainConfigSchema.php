@@ -4436,6 +4436,14 @@ class MainConfigSchema {
 	];
 
 	/**
+	 * Add extra headers to purge requests sent to the proxy servers.
+	 */
+	public const CdnServersPurgeExtraHeaders = [
+		'default' => [],
+		'type' => 'map',
+	];
+
+	/**
 	 * Whether to use a Host header in purge requests sent to the proxy servers
 	 * configured in $wgCdnServers. Set this to false to support a CDN
 	 * configured in forward-proxy mode.

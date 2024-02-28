@@ -39,6 +39,9 @@ class ApiOpenSearch extends ApiBase {
 	/** @var array list of api allowed params */
 	private $allowedParams = null;
 
+	/** @var boolean whether display redirects */
+	private $displayRedirects = false;
+
 	/** @var LinkBatchFactory */
 	private $linkBatchFactory;
 
@@ -142,6 +145,7 @@ class ApiOpenSearch extends ApiBase {
 	 *  Note that phan annotations don't support keys containing a space.
 	 */
 	private function search( $search, array $params ) {
+		$params['backend'] = SearchMySQL::class;
 		$searchEngine = $this->buildSearchEngine( $params );
 		$titles = $searchEngine->extractTitles( $searchEngine->completionSearchWithVariants( $search ) );
 		$results = [];
@@ -159,6 +163,7 @@ class ApiOpenSearch extends ApiBase {
 			// Backwards compatibility, don't resolve for JSON.
 			$resolveRedir = $this->getFormat() !== 'json';
 		} else {
+			$this->displayRedirects = $params['redirects'] === 'display';
 			$resolveRedir = $params['redirects'] === 'resolve';
 		}
 
@@ -248,8 +253,21 @@ class ApiOpenSearch extends ApiBase {
 				$terms = [];
 				$descriptions = [];
 				$urls = [];
+				$arrow = ' ' . $this->getLanguage()->getArrow() . ' ';
 				foreach ( $results as $r ) {
-					$terms[] = $r['title']->getPrefixedText();
+					if ( $this->displayRedirects ) {
+						if ( $r['redirect from'] instanceof Title ) {
+							$terms[] = $r['redirect from']->getPrefixedText() . $arrow . $r['title']->getFullText();
+						} else {
+							$terms[] = $r['title']->getPrefixedText();
+						}
+					} else {
+						if ( $r['redirect from'] instanceof Title ) {
+							$terms[] = $r['redirect from']->getPrefixedText();
+						} else {
+							$terms[] = $r['title']->getPrefixedText();
+						}
+					}
 					$descriptions[] = strval( $r['extract'] );
 					$urls[] = $r['url'];
 				}
@@ -306,7 +324,7 @@ class ApiOpenSearch extends ApiBase {
 				ParamValidator::PARAM_DEPRECATED => true,
 			],
 			'redirects' => [
-				ParamValidator::PARAM_TYPE => [ 'return', 'resolve' ],
+				ParamValidator::PARAM_TYPE => [ 'return', 'resolve', 'display' ],
 				ApiBase::PARAM_HELP_MSG_PER_VALUE => [],
 				ApiBase::PARAM_HELP_MSG_APPEND => [ 'apihelp-opensearch-param-redirects-append' ],
 			],

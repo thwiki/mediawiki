@@ -356,7 +356,9 @@ class MultiHttpClient implements LoggerAwareInterface {
 	protected function getCurlHandle( array &$req, array $opts ) {
 		$ch = curl_init();
 
-		curl_setopt( $ch, CURLOPT_PROXY, $req['proxy'] ?? $this->proxy );
+		if ( $req['host'] && ($req['proxy'] ?? $this->proxy)) {
+			curl_setopt( $ch, CURLOPT_RESOLVE, [ ( $req['host'] ?? $this->proxy ) . ':443:' . ( $req['proxy'] ?? $this->proxy ) ] );
+		}
 		curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT_MS, intval( $opts['connTimeout'] * 1e3 ) );
 		curl_setopt( $ch, CURLOPT_TIMEOUT_MS, intval( $opts['reqTimeout'] * 1e3 ) );
 		curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );

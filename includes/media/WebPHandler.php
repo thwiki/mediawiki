@@ -277,7 +277,7 @@ class WebPHandler extends BitmapHandler {
 	 * @return array
 	 */
 	public function getThumbType( $ext, $mime, $params = null ) {
-		return [ 'png', 'image/png' ];
+		return [ 'webp', 'image/webp' ];
 	}
 
 	/**

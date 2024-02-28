@@ -580,7 +580,7 @@ abstract class SearchEngine {
 			// False means hook worked.
 			// FIXME: Yes, the API is weird. That's why it is going to be deprecated.
 
-			return SearchSuggestionSet::fromStrings( $results );
+			return SearchSuggestionSet::fromTitles( $results );
 		} else {
 			// Hook did not do the job, use default simple search
 			$results = $this->simplePrefixSearch( $search );

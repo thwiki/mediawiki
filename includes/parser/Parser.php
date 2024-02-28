@@ -506,7 +506,7 @@ class Parser {
 		$this->svcOptions = $svcOptions;
 
 		$this->urlUtils = $urlUtils;
-		$this->mExtLinkBracketedRegex = '/\[(((?i)' . $this->urlUtils->validProtocols() . ')' .
+		$this->mExtLinkBracketedRegex = '/\[(((?i)' . $this->urlUtils->validProtocols() . '|\\/)' .
 			self::EXT_LINK_ADDR .
 			self::EXT_LINK_URL_CLASS . '*)\p{Zs}*([^\]\\x00-\\x08\\x0a-\\x1F\\x{FFFD}]*?)\]/Su';
 
@@ -2187,7 +2187,7 @@ class Parser {
 		$i = 0;
 		while ( $i < count( $bits ) ) {
 			$url = $bits[$i++];
-			$i++; // protocol
+			$protocol = $bits[$i++];
 			$text = $bits[$i++];
 			$trail = $bits[$i++];
 
@@ -2235,9 +2235,13 @@ class Parser {
 			# This means that users can paste URLs directly into the text
 			# Funny characters like ö aren't valid in URLs anyway
 			# This was changed in August 2004
-			$s .= Linker::makeExternalLink( $url, $text, false, $linktype,
-				$this->getExternalLinkAttribs( $url ), $this->getTitle() ) . $dtrail . $trail;
-
+			if ( $protocol == '/' ) {
+				$s .= Linker::makeInternalLink( $url, $text, false, $linktype );
+			} else {
+				$s .= Linker::makeExternalLink( $url, $text, false, $linktype,
+					$this->getExternalLinkAttribs( $url ), $this->getTitle() );
+			}
+			$s .= $dtrail . $trail;
 			# Register link in the output object.
 			$this->mOutput->addExternalLink( $url );
 		}

@@ -79,6 +79,12 @@ $namespaceNames = [
 	NS_HELP_TALK        => 'Help_talk',
 	NS_CATEGORY         => 'Category',
 	NS_CATEGORY_TALK    => 'Category_talk',
+	NS_OMAKE            => 'Omake',
+	NS_OMAKE_TALK       => 'Omake_talk',
+	NS_GDIALOGUE        => 'Dialogue',
+	NS_GDIALOGUE_TALK   => 'Dialogue_talk',
+	NS_LYRICS           => 'Lyrics',
+	NS_LYRICS_TALK      => 'Lyrics_talk',
 ];
 
 /**

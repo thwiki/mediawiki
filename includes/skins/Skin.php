@@ -1492,7 +1492,7 @@ abstract class Skin extends ContextSource {
 			$services = MediaWikiServices::getInstance();
 			$callback = function ( $old = null, &$ttl = null ) {
 				$bar = [];
-				$this->addToSidebar( $bar, 'sidebar' );
+				// $this->addToSidebar( $bar, 'sidebar' );
 
 				// This hook may vary its behaviour by skin.
 				$this->getHookRunner()->onSkinBuildSidebar( $this, $bar );

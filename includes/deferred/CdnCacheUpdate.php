@@ -297,6 +297,8 @@ class CdnCacheUpdate implements DeferrableUpdate, MergeableUpdate {
 	 */
 	private static function naivePurge( array $urls ) {
 		$cdnServers = MediaWikiServices::getInstance()->getMainConfig()->get( MainConfigNames::CdnServers );
+		$cdnServersNoPurge = MediaWikiServices::getInstance()->getMainConfig()->get( MainConfigNames::CdnServersNoPurge );
+		$cdnServersPurgeExtraHeaders = MediaWikiServices::getInstance()->getMainConfig()->get( MainConfigNames::CdnServersPurgeExtraHeaders );
 
 		$reqs = [];
 		foreach ( $urls as $url ) {
@@ -305,6 +307,9 @@ class CdnCacheUpdate implements DeferrableUpdate, MergeableUpdate {
 			$urlHost = strlen( $urlInfo['port'] ?? '' )
 				? IPUtils::combineHostAndPort( $urlInfo['host'], (int)$urlInfo['port'] )
 				: $urlInfo['host'];
+			if ( in_array( $urlHost, [ 'thwiki.cc' ] ) ) {
+				continue;
+			}
 			$baseReq = [
 				'method' => 'PURGE',
 				'url' => $url,
@@ -313,10 +318,12 @@ class CdnCacheUpdate implements DeferrableUpdate, MergeableUpdate {
 					'Connection' => 'Keep-Alive',
 					'Proxy-Connection' => 'Keep-Alive',
 					'User-Agent' => 'MediaWiki/' . MW_VERSION . ' ' . __CLASS__
-				]
+				] + $cdnServersPurgeExtraHeaders
 			];
 			foreach ( $cdnServers as $server ) {
-				$reqs[] = ( $baseReq + [ 'proxy' => $server ] );
+				if ( !in_array( $server, $cdnServersNoPurge ) ){
+					$reqs[] = ( $baseReq + [ 'host' => $urlHost, 'proxy' => $server ] );
+				}
 			}
 		}
 

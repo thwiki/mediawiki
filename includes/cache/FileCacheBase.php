@@ -92,6 +92,13 @@ abstract class FileCacheBase {
 		$subDirs = $this->typeSubdirectory() . $this->hashSubdirectory();
 		# Avoid extension confusion
 		$key = str_replace( '.', '%2E', urlencode( $this->mKey ) );
+		# Calculate length of file name
+		$extLength = strlen( $this->mExt ) + 1 + ( $this->useGzip() ? 3 : 0 );
+		# Check if file name is too long (typically 255 is the maximum length of file names in linux)
+		if ( strlen( $key ) + $extLength > 255 ) {
+			# If file name is too long, shorten it
+			$key = substr( $key, 0, 255 - 32 - $extLength ) . md5( $key );
+		}
 		# Build the full file path
 		$this->mFilePath = "{$dir}/{$subDirs}{$key}.{$this->mExt}";
 		if ( $this->useGzip() ) {

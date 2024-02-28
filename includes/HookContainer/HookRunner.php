@@ -954,12 +954,12 @@ class HookRunner implements
 		);
 	}
 
-	public function onBeforeParserFetchFileAndTitle( $parser, $nt, &$options,
+	public function onBeforeParserFetchFileAndTitle( $parser, &$nt, &$options,
 		&$descQuery
 	) {
 		return $this->container->run(
 			'BeforeParserFetchFileAndTitle',
-			[ $parser, $nt, &$options, &$descQuery ]
+			[ $parser, &$nt, &$options, &$descQuery ]
 		);
 	}
 
@@ -969,6 +969,20 @@ class HookRunner implements
 		return $this->container->run(
 			'BeforeParserFetchTemplateAndtitle',
 			[ $parser, $title, &$skip, &$id ]
+		);
+	}
+
+	public function onBeforeAddToGallery( &$title, &$html, &$alt, &$link, &$handlerOpts ) {
+		return $this->container->run(
+			'BeforeAddToGallery',
+			[ &$title, &$html, &$alt, &$link, &$handlerOpts ]
+		);
+	}
+
+	public function onBeforeAddToImageList( $imageListPager, $file, &$result ) {
+		return $this->container->run(
+			'BeforeAddToImageList',
+			[ $imageListPager, $file, &$result ]
 		);
 	}
 
@@ -2306,6 +2320,15 @@ class HookRunner implements
 	) {
 		return $this->container->run(
 			'LinkerMakeExternalLink',
+			[ &$url, &$text, &$link, &$attribs, $linkType ]
+		);
+	}
+
+	public function onLinkerMakeInternalLink( &$url, &$text, &$link, &$attribs,
+		$linkType
+	) {
+		return $this->container->run(
+			'LinkerMakeInternalLink',
 			[ &$url, &$text, &$link, &$attribs, $linkType ]
 		);
 	}

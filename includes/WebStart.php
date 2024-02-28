@@ -38,7 +38,7 @@
 # points and when $wgOut gets disabled or overridden.
 use MediaWiki\Settings\SettingsBuilder;
 
-header( 'X-Content-Type-Options: nosniff' );
+// header( 'X-Content-Type-Options: nosniff' );
 
 # Valid web server entry point, enable includes.
 # Please don't move this line to includes/Defines.php. This line essentially
@@ -46,6 +46,9 @@ header( 'X-Content-Type-Options: nosniff' );
 # any script that includes it becomes an entry point, thereby defeating
 # its purpose.
 define( 'MEDIAWIKI', true );
+
+require_once( __DIR__ . '/extensions/Deny/deny.php' );
+testRestriction();
 
 /**
  * @param SettingsBuilder $settings

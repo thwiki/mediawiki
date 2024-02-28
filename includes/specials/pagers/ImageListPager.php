@@ -441,6 +441,10 @@ class ImageListPager extends TablePager {
 				$file = $this->localRepo->findFile( $this->getCurrentRow()->img_name, $opt );
 				// If statement for paranoia
 				if ( $file ) {
+					$html = '';
+					if ( !Hooks::runner()->onBeforeAddToImageList( $this, $file, $html ) ) {
+						return $html;
+					}
 					$thumb = $file->transform( [ 'width' => 180, 'height' => 360 ] );
 					if ( $thumb ) {
 						return $thumb->toHtml( [ 'desc-link' => true ] );
