@@ -48,6 +48,8 @@ sftp-config.json
 /LocalSettings.php
 /settings/secrets
 /includes/PlatformSettings.php
+/extensions/*/
+/skins/*/
 /vendor
 album.php
 ajax.php

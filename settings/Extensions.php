@@ -261,6 +261,7 @@ $wgMWOAuthSecureTokenTransfer = true;
 $wgOAuthGroupsToNotify = ['user'];
 
 wfLoadExtension('PageImages');
+$wgPageImagesOpenGraph = false;
 $wgPageImagesLeadSectionOnly = false;
 $wgPageImagesAPIDefaultLicense = 'any';
 $wgPageImagesNamespaces = $wgContentNamespaces;

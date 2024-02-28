@@ -9,7 +9,6 @@ if (!defined('MEDIAWIKI')) {
 ## If you use ImageMagick (or any other shell command) on a
 ## Linux server, this will need to be set to the name of an
 ## available UTF-8 locale
-$wgShellLocale = "en_US.utf8";
 $wgMaxShellMemory = 150 * 1024 * 1024; //为svg生成png增加（150M）
 $wgMaxShellFileSize = 120 * 1024 * 1024; //（120M）
 $wgMaxImageArea = 100 * 1024 * 1024; //（100M）

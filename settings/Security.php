@@ -44,8 +44,6 @@ $wgCdnServersPurgeExtraHeaders = [
 $wgAllowSchemaUpdates = true;
 
 ## 预防漏洞
-$wgActions['mcrundo'] = false;
-$wgActions['mcrrestore'] = false;
 $wgWhitelistRead = [];
 $wgWhitelistReadRegexp = [];
 

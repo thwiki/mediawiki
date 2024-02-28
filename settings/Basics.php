@@ -15,7 +15,6 @@ $wgScriptExtension = ".php";
 $wgPhpCli = "php";
 
 # Enable Rest API
-$wgEnableRestAPI = true;
 $wgRestPath = "$wgScriptPath/rest";
 
 ## The relative URL path to the skins directory
