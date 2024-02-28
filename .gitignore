@@ -46,7 +46,11 @@ sftp-config.json
 /maintenance/.mwsql_history
 /maintenance/dev/data
 /LocalSettings.php
+/settings/secrets
 /includes/PlatformSettings.php
+album.php
+ajax.php
+ajax2.php
 
 # Building & testing
 npm-debug.log
@@ -59,11 +63,9 @@ phpunit.xml
 /tests/selenium/log
 .eslintcache
 .api-testing.config.json
-.phan/local-config.php
 
 # Composer
 /composer.lock
-/composer.local.json
 /composer.phar
 
 # Operating systems
@@ -82,9 +84,9 @@ Thumbs.db
 /favicon.ico
 /static*
 /tags
-/.htaccess
 /.htpasswd
 *.rej
+error_log
 
 # Docker
 docker-compose.override.yml
