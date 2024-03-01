@@ -47,7 +47,7 @@ use MediaWiki\Settings\SettingsBuilder;
 # its purpose.
 define( 'MEDIAWIKI', true );
 
-require_once( __DIR__ . '/extensions/Deny/deny.php' );
+require_once( dirname(__DIR__) . '/extensions/Deny/deny.php' );
 testRestriction();
 
 /**

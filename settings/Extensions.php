@@ -32,7 +32,6 @@ $wgEnableInterwikiTranscluding = true;
 $wgEnableInterwikiTemplatesTracking = true;
 $wgInterwikiViewOnly = false;
 
-wfLoadExtension('LocalisationUpdate');
 wfLoadExtension('Nuke');
 
 wfLoadExtension('ParserFunctions');
@@ -106,8 +105,7 @@ $egArraysCompatibilityMode = true;
 
 wfLoadExtension('AskTrack');
 
-//wfLoadExtension( 'CategorySortHeaders' );
-require_once "$IP/extensions/CategorySortHeaders/CategorySortHeaders.php";
+wfLoadExtension( 'CategorySortHeaders' );
 
 wfLoadExtension('CategoryTree');
 $wgUseAjax = true;
@@ -152,8 +150,7 @@ $wgCollisionRank = [
 	'列表外词条' => 18,
 ];
 
-//wfLoadExtension( 'ContributionScores' );
-require_once "$IP/extensions/ContributionScores/ContributionScores.php";
+wfLoadExtension( 'ContributionScores' );
 $wgContribScoreIgnoreBots = false; // Exclude Bots from the reporting - Can be omitted.
 $wgContribScoreIgnoreBlockedUsers = true; // Exclude Blocked Users from the reporting - Can be omitted.
 $wgContribScoresUseRealName = true; // Use real user names when available - Can be omitted. Only for MediaWiki 1.19 and later.
@@ -208,10 +205,10 @@ require_once "$IP/extensions/HtmlMedia/HtmlMedia.php";
 
 wfLoadExtension('LabeledSectionTransclusion');
 
-require_once "$IP/extensions/LanguageSelector/LanguageSelector.php";
+wfLoadExtension('LanguageSelector');
 $wgLanguageSelectorShowAll = false;
-$wgLanguageSelectorDetectLanguage = LANGUAGE_SELECTOR_USE_CONTENT_LANG;
-$wgLanguageSelectorLocation = LANGUAGE_SELECTOR_AS_PORTLET;
+$wgLanguageSelectorDetectLanguage = 0; // LANGUAGE_SELECTOR_USE_CONTENT_LANG;
+$wgLanguageSelectorLocation = 3; // LANGUAGE_SELECTOR_AS_PORTLET;
 
 wfLoadExtension('SimpleMathJax');
 
@@ -273,8 +270,7 @@ $wgPageImagesScores['ratio'] = [
 	"31" => -100,
 ];
 
-//wfLoadExtension( 'PageNotice' );
-require_once "$IP/extensions/PageNotice/PageNotice.php";
+wfLoadExtension( 'PageNotice' );
 
 wfLoadExtension('QRLite');
 
@@ -282,6 +278,7 @@ wfLoadExtension('QRLite');
 require_once "$IP/extensions/RegexFun/RegexFun.php";
 
 wfLoadExtension('RelatedArticles');
+$wgRelatedArticlesUseCirrusSearchApiUrl = '/api.php';
 $wgRelatedArticlesShowInSidebar = false;
 $wgRelatedArticlesShowInFooter = true;
 $wgRelatedArticlesUseCirrusSearch = true;
@@ -340,6 +337,8 @@ require_once "$IP/extensions/TableMapping/TableMapping.php";
 //wfLoadExtension('TailwindCSS');
 $wgTailwindCSSStyleBuilderServer = 'localhost:8067';
 
+wfLoadExtension( 'TemplateData' );
+
 wfLoadExtension('TemplateStyles');
 
 $wgTemplateStylesAllowedUrls = [
@@ -366,8 +365,7 @@ $wgTemplateStylesNamespaces = [
 wfLoadExtension('TextExtracts');
 wfLoadExtension('TitleKey');
 
-//wfLoadExtension( 'UrlGetParameters' );
-require_once "$IP/extensions/UrlGetParameters/UrlGetParameters.php";
+wfLoadExtension( 'UrlGetParameters' );
 
 wfLoadExtension('Variables');
 

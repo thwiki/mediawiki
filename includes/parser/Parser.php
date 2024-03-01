@@ -5382,10 +5382,14 @@ class Parser {
 		$options = [];
 		$descQuery = false;
 		$title = Title::castFromLinkTarget( $link ); // hook signature compat
+		$newTitle = $title;
 		$this->hookRunner->onBeforeParserFetchFileAndTitle(
 			// @phan-suppress-next-line PhanTypeMismatchArgument Type mismatch on pass-by-ref args
-			$this, $title, $options, $descQuery
+			$this, $newTitle, $options, $descQuery
 		);
+		if ( $newTitle && !$title->isSamePageAs($newTitle) ) {
+			$link = $newTitle;
+		}
 		# Fetch and register the file (file title may be different via hooks)
 		list( $file, $link ) = $this->fetchFileAndTitle( $link, $options );
 
