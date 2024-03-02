@@ -156,13 +156,24 @@ class HTMLFileCache extends FileCacheBase {
 		header( 'Content-Language: ' .
 			MediaWikiServices::getInstance()->getContentLanguage()->getHtmlCode() );
 		if ( $this->useGzip() ) {
-			if ( wfClientAcceptsGzip() ) {
-				header( 'Content-Encoding: gzip' );
-				readfile( $filename );
+			if ( $this->hasBrotli() ) {
+				if ( wfClientAcceptsBrotli() ) {
+					header( 'Content-Encoding: br' );
+					readfile( $filename );
+				} else {
+					/* Send uncompressed */
+					wfDebug( __METHOD__ . " uncompressing cache file and sending it" );
+					echo brotli_uncompress( file_get_contents( $filename ) );
+				}
 			} else {
-				/* Send uncompressed */
-				wfDebug( __METHOD__ . " uncompressing cache file and sending it" );
-				readgzfile( $filename );
+				if ( wfClientAcceptsGzip() ) {
+					header( 'Content-Encoding: gzip' );
+					readfile( $filename );
+				} else {
+					/* Send uncompressed */
+					wfDebug( __METHOD__ . " uncompressing cache file and sending it" );
+					readgzfile( $filename );
+				}
 			}
 		} else {
 			readfile( $filename );
@@ -208,8 +219,12 @@ class HTMLFileCache extends FileCacheBase {
 
 		// gzip output to buffer as needed and set headers...
 		// @todo Ugly wfClientAcceptsGzip() function - use context!
-		if ( $this->useGzip() && wfClientAcceptsGzip() ) {
-			header( 'Content-Encoding: gzip' );
+		if ( $this->useGzip() && ( $this->hasBrotli() ? wfClientAcceptsBrotli() : wfClientAcceptsGzip() ) ) {
+			if ( $this->hasBrotli() ) {
+				header( 'Content-Encoding: br' );
+			} else {
+				header( 'Content-Encoding: gzip' );
+			}
 
 			return $compressed;
 		}

@@ -1200,6 +1200,39 @@ function wfClientAcceptsGzip( $force = false ) {
 }
 
 /**
+ * Whether the client accept brotli encoding
+ *
+ * Uses the Accept-Encoding header to check if the client supports brotli encoding.
+ * Use this when considering to send a brotli-encoded response to the client.
+ *
+ * @param bool $force Forces another check even if we already have a cached result.
+ * @return bool
+ */
+function wfClientAcceptsBrotli( $force = false ) {
+	static $result = null;
+	if ( $result === null || $force ) {
+		$result = false;
+		if ( isset( $_SERVER['HTTP_ACCEPT_ENCODING'] ) ) {
+			# @todo FIXME: We may want to disallow some broken browsers
+			$m = [];
+			if ( preg_match(
+					'/\bbr(?:;(q)=([0-9]+(?:\.[0-9]+)))?\b/',
+					$_SERVER['HTTP_ACCEPT_ENCODING'],
+					$m
+				)
+			) {
+				if ( isset( $m[2] ) && ( $m[1] == 'q' ) && ( $m[2] == 0 ) ) {
+					return $result;
+				}
+				wfDebug( "wfClientAcceptsBrotli: client accepts brotli." );
+				$result = true;
+			}
+		}
+	}
+	return $result;
+}
+
+/**
  * Escapes the given text so that it may be output using addWikiText()
  * without any linking, formatting, etc. making its way through. This
  * is achieved by substituting certain characters with HTML entities.

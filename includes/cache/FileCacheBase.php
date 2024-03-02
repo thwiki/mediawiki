@@ -47,6 +47,7 @@ abstract class FileCacheBase {
 	protected $mExt = 'cache';
 	protected $mFilePath;
 	protected $mUseGzip;
+	protected $mHasBrotli;
 	/** @var bool|null lazy loaded */
 	protected $mCached;
 	/** @var ServiceOptions */
@@ -62,6 +63,7 @@ abstract class FileCacheBase {
 			MediaWikiServices::getInstance()->getMainConfig()
 		);
 		$this->mUseGzip = (bool)$this->options->get( MainConfigNames::UseGzip );
+		$this->mHasBrotli = extension_loaded( 'brotli' );
 	}
 
 	/**
@@ -102,7 +104,7 @@ abstract class FileCacheBase {
 		# Build the full file path
 		$this->mFilePath = "{$dir}/{$subDirs}{$key}.{$this->mExt}";
 		if ( $this->useGzip() ) {
-			$this->mFilePath .= '.gz';
+			$this->mFilePath .= $this->hasBrotli() ? '.br' : '.gz';
 		}
 
 		return $this->mFilePath;
@@ -162,14 +164,26 @@ abstract class FileCacheBase {
 	}
 
 	/**
+	 * Check if the brotli extension is loaded
+	 * @return bool
+	 */
+	protected function hasBrotli() {
+		return $this->mHasBrotli;
+	}
+
+	/**
 	 * Get the uncompressed text from the cache
 	 * @return string
 	 */
 	public function fetchText() {
 		if ( $this->useGzip() ) {
-			$fh = gzopen( $this->cachePath(), 'rb' );
+			if ( $this->hasBrotli() ) {
+				return brotli_uncompress( file_get_contents( $this->cachePath() ) );
+			} else {
+				$fh = gzopen( $this->cachePath(), 'rb' );
 
-			return stream_get_contents( $fh );
+				return stream_get_contents( $fh );
+			}
 		} else {
 			return file_get_contents( $this->cachePath() );
 		}
@@ -182,7 +196,11 @@ abstract class FileCacheBase {
 	 */
 	public function saveText( $text ) {
 		if ( $this->useGzip() ) {
-			$text = gzencode( $text );
+			if ( $this->hasBrotli() ) {
+				$text = brotli_compress( $text, 6 );
+			} else {
+				$text = gzencode( $text );
+			}
 		}
 
 		$this->checkCacheDirs(); // build parent dir
