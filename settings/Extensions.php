@@ -181,6 +181,16 @@ $wgDisableSearchUpdate = false;
 'level' => 'warning',
 ];*/
 $wgSearchType = 'CirrusSearch';
+$wgCirrusSearchServers = [
+	[
+		'transport' => [
+			"type" => \CirrusSearch\Elastica\ES6CompatTransportWrapper::class,
+			'wrapped_transport' => 'Http'
+		],
+		"port" => 9200,
+		"host" => "localhost"
+	]
+];
 $wgSearchTypeAlternatives = [SearchMySQL::class];
 $wgCirrusSearchClientSideUpdateTimeout = 60;
 $wgCirrusSearchMoreLikeThisTTL = 86400 * 7; // Cache more like results for 7 days

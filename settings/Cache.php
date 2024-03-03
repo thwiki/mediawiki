@@ -33,7 +33,7 @@ $wgResourceLoaderMaxage = [
 
 # File Cache设定
 $wgUseFileCache = true;
-$wgUseGzip = false;
-$wgFileCacheDirectory = "${IP}_static/filecache";
+$wgUseGzip = true;
+$wgFileCacheDirectory = "${IP}_cache";
 # When you make changes to this configuration file, this will make sure that cached pages are cleared.
 $wgInvalidateCacheOnLocalSettingsChange = false;
