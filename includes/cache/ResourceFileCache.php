@@ -55,7 +55,7 @@ class ResourceFileCache extends FileCacheBase {
 		$modules = array_unique( $context->getModules() ); // remove duplicates
 		sort( $modules ); // normalize the order (permutation => combination)
 		$cache->mKey = sha1( $context->getHash() . implode( '|', $modules ) );
-		if ( count( $modules ) == 1 ) {
+		if ( count( $modules ) == 1 || $cache->useGzip() ) {
 			$cache->mCacheWorthy = true; // won't take up much space
 		}
 
