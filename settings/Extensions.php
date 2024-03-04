@@ -105,7 +105,7 @@ $egArraysCompatibilityMode = true;
 
 wfLoadExtension('AskTrack');
 
-wfLoadExtension( 'CategorySortHeaders' );
+wfLoadExtension('CategorySortHeaders');
 
 wfLoadExtension('CategoryTree');
 $wgUseAjax = true;
@@ -150,7 +150,7 @@ $wgCollisionRank = [
 	'列表外词条' => 18,
 ];
 
-wfLoadExtension( 'ContributionScores' );
+wfLoadExtension('ContributionScores');
 $wgContribScoreIgnoreBots = false; // Exclude Bots from the reporting - Can be omitted.
 $wgContribScoreIgnoreBlockedUsers = true; // Exclude Blocked Users from the reporting - Can be omitted.
 $wgContribScoresUseRealName = true; // Use real user names when available - Can be omitted. Only for MediaWiki 1.19 and later.
@@ -194,6 +194,8 @@ $wgCirrusSearchServers = [
 $wgSearchTypeAlternatives = [SearchMySQL::class];
 $wgCirrusSearchClientSideUpdateTimeout = 60;
 $wgCirrusSearchMoreLikeThisTTL = 86400 * 7; // Cache more like results for 7 days
+
+wfLoadExtension('ExtraMagicWords');
 
 require_once "$IP/extensions/FixedHeader/FixedHeader.php";
 
@@ -280,7 +282,7 @@ $wgPageImagesScores['ratio'] = [
 	"31" => -100,
 ];
 
-wfLoadExtension( 'PageNotice' );
+wfLoadExtension('PageNotice');
 
 wfLoadExtension('QRLite');
 
@@ -347,7 +349,9 @@ require_once "$IP/extensions/TableMapping/TableMapping.php";
 //wfLoadExtension('TailwindCSS');
 $wgTailwindCSSStyleBuilderServer = 'localhost:8067';
 
-wfLoadExtension( 'TemplateData' );
+wfLoadExtension('TemplateData');
+
+wfLoadExtension('TemplateFunctions');
 
 wfLoadExtension('TemplateStyles');
 
@@ -375,7 +379,7 @@ $wgTemplateStylesNamespaces = [
 wfLoadExtension('TextExtracts');
 wfLoadExtension('TitleKey');
 
-wfLoadExtension( 'UrlGetParameters' );
+wfLoadExtension('UrlGetParameters');
 
 wfLoadExtension('Variables');
 
