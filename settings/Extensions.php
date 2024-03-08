@@ -43,7 +43,7 @@ $wgPdfPostProcessor = $wgImageMagickConvertCommand;
 $wgPdfInfo = 'pdfinfo';
 
 wfLoadExtension('Poem');
-wfLoadExtension('Renameuser');
+
 //wfLoadExtension( 'SpamBlacklist' );
 wfLoadExtension('SyntaxHighlight_GeSHi');
 
@@ -99,6 +99,8 @@ $wgVipsOptions = [
 require_once "$IP/extensions/Achievements/Achievements.php";
 
 wfLoadExtension('AnalyzePage');
+$wgCustomRedirectNamespaces = [0, 4, 6, 8, 10, 12, 506, 508, 512];
+$wgRegexRedirectNamespaces = [0];
 
 wfLoadExtension('Arrays');
 $egArraysCompatibilityMode = true;
