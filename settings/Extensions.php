@@ -379,6 +379,9 @@ $wgTemplateStylesNamespaces = [
 ];
 
 wfLoadExtension('TextExtracts');
+
+wfLoadExtension('TextTransform');
+
 wfLoadExtension('TitleKey');
 
 wfLoadExtension('UrlGetParameters');
