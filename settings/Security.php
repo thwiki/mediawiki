@@ -29,8 +29,6 @@ $wgUseCdn = true;
 ## 仅允许本机及指定加速服务器前台
 $wgCdnServers = [];
 $wgCdnServers[] = "127.0.0.1"; // localhost
-$wgCdnServers[] = "142.171.98.11"; // sql.thwiki
-$wgCdnServers[] = "142.171.98.139"; // http.thwiki
 
 $wgCdnServersNoPurge = [];
 $wgCdnServersNoPurge[] = "127.0.0.1";

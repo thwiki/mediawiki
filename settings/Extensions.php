@@ -96,11 +96,15 @@ $wgVipsOptions = [
 	],
 ];
 
+wfLoadExtension('CustomRedirect');
+$wgCustomRedirectUseShortUrl = true;
+$wgCustomRedirectShowShortUrl = true;
+$wgCustomRedirectEnabledNamespaces = [0, 4, 6, 8, 10, 12, 506, 508, 512];
+$wgCustomRedirectRegexEnabledNamespaces = [0];
+
 require_once "$IP/extensions/Achievements/Achievements.php";
 
 wfLoadExtension('AnalyzePage');
-$wgCustomRedirectNamespaces = [0, 4, 6, 8, 10, 12, 506, 508, 512];
-$wgRegexRedirectNamespaces = [0];
 
 wfLoadExtension('Arrays');
 $egArraysCompatibilityMode = true;
@@ -122,7 +126,8 @@ wfLoadExtension('CheckUser');
 wfLoadExtension('ChineseNumerals');
 
 wfLoadExtension('CollisionManager');
-$wgCollisionRank = [
+$wgCollisionManagerDisambigIcon = 'https://static.thwiki.cc/template/disambig.svg';
+$wgCollisionManagerRulePriorities = [
 	'官方游戏' => 1,
 	'官方书籍' => 2,
 	'官方专辑' => 3,
@@ -134,22 +139,24 @@ $wgCollisionRank = [
 	'符卡' => 8,
 	'场景' => 9,
 	'物品' => 9,
-	'相关作品' => 10,
-	'商业游戏' => 10,
-	'活动' => 10,
-	'同人角色' => 11,
-	'公司会社' => 12,
-	'同人社团' => 12,
-	'人物' => 13,
-	'同人软件' => 14,
-	'同人游戏' => 14,
-	'同人专辑' => 15,
-	'同人志' => 15,
-	'同人视频' => 15,
-	'模型周边' => 15,
-	'周边' => 16,
-	'其他同人作品' => 17,
-	'列表外词条' => 18,
+	'列表外词条' => 10,
+	'相关作品' => 11,
+	'商业游戏' => 12,
+	'活动' => 13,
+	'同人角色' => 14,
+	'公司会社' => 15,
+	'同人社团' => 16,
+	'人物' => 17,
+	'同人软件' => 19,
+	'同人游戏' => 20,
+	'同人专辑' => 20,
+	'同人志' => 20,
+	'同人视频' => 20,
+	'模型周边' => 20,
+	'周边' => 20,
+	'其他同人作品' => 20,
+	'' => 25,
+	'/^20\\d\\d$/' => 30,
 ];
 
 wfLoadExtension('ContributionScores');
@@ -381,8 +388,6 @@ $wgTemplateStylesNamespaces = [
 wfLoadExtension('TextExtracts');
 
 wfLoadExtension('TextTransform');
-
-wfLoadExtension('TitleKey');
 
 wfLoadExtension('UrlGetParameters');
 
