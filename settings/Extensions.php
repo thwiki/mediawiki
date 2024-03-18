@@ -231,6 +231,15 @@ $wgLanguageSelectorShowAll = false;
 $wgLanguageSelectorDetectLanguage = 0; // LANGUAGE_SELECTOR_USE_CONTENT_LANG;
 $wgLanguageSelectorLocation = 3; // LANGUAGE_SELECTOR_AS_PORTLET;
 
+wfLoadExtension('Lockdown');
+$wgActionLockdown['history'] = ['user'];
+$wgSpecialPageLockdown['Export'] = ['user'];
+$wgSpecialPageLockdown['Recentchanges'] = ['user'];
+$wgSpecialPageLockdown['Recentchangeslinked'] = ['user'];
+$wgSpecialPageLockdown['Whatlinkshere'] = ['user'];
+$wgSpecialPageLockdown['PagesWithSameName'] = ['user'];
+$wgSpecialPageLockdown['PageHistory'] = ['user'];
+
 wfLoadExtension('SimpleMathJax');
 
 wfLoadExtension('MaintenanceApi');
