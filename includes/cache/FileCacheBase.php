@@ -197,7 +197,7 @@ abstract class FileCacheBase {
 	public function saveText( $text ) {
 		if ( $this->useGzip() ) {
 			if ( $this->hasBrotli() ) {
-				$text = brotli_compress( $text, 6 );
+				$text = brotli_compress( $text, 9 );
 			} else {
 				$text = gzencode( $text );
 			}
