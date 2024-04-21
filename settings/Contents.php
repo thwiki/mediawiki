@@ -11,8 +11,6 @@ if (!defined('MEDIAWIKI')) {
 ## available UTF-8 locale
 $wgMaxShellMemory = 150 * 1024 * 1024; //为svg生成png增加（150M）
 $wgMaxShellFileSize = 120 * 1024 * 1024; //（120M）
-$wgMaxImageArea = 100 * 1024 * 1024; //（100M）
-$wgMaxAnimatedGifArea = 100 * 1024 * 1024; //（100M）
 $wgMaxArticleSize = 4096;
 
 # 外链加上target="_blank"
@@ -27,10 +25,6 @@ $wgAllowUserCssPrefs = true;
 $wgAllowDisplayTitle = true;
 $wgRestrictDisplayTitle = false;
 $wgDisableTitleConversion = true;
-$wgContentHandlerUseDB = true;
-$wgEnableScaryTranscluding = true;
-
-$wgFragmentMode = [ 'html5', 'legacy', ];
 
 # Path to the GNU diff3 utility. Used for conflict resolution.
 $wgDiff3 = "";
@@ -49,12 +43,14 @@ $wgUseImageMagick = true;
 $wgGenerateThumbnailOnParse = true;
 $wgUploadSizeWarning = 20 * 1024 * 1024;
 $wgMaxUploadSize = 20 * 1024 * 1024;
+$wgMaxImageArea = 6000 * 6000;
+$wgMaxAnimatedGifArea = 60 * 1024 * 1024;
 $wgImageMagickConvertCommand = "/usr/local/bin/magick";
 $wgAllowExternalImages = true;
 $wgAllowCopyUploads = true;
 $wgCopyUploadsFromSpecialUpload = true;
 $wgAllowImageTag = false; //Allow <img> tag to be used in wikitext
-$wgFileExtensions = ['png', 'gif', 'jpg', 'jpeg', 'pdf', 'mid', 'midi', 'mp3', 'svg', 'webp']; // 'ico'存在跨站攻击风险
+$wgFileExtensions = ['png', 'gif', 'jpg', 'jpeg', 'pdf', 'mid', 'midi', 'mp3', 'svg', 'webp', 'apng']; // 'ico'存在跨站攻击风险
 $wgAllowTitlesInSVG = false;
 #将图片与wiki源程序分开，并使用不同的域名
 $wgUploadDirectory = "${IP}_upload"; //图片被上传到的绝对路径

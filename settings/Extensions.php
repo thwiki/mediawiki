@@ -62,7 +62,7 @@ $wgDefaultUserOptions['wikieditor-preview'] = 1;
 
 wfLoadExtension('VipsScaler');
 $wgVipsOptions = [
-	// Sharpen jpeg files which are shrunk more than 1.2
+	// Sharpen jpeg files which are shrunk more than 1.5
 	[
 		'conditions' => [
 			'mimeType' => 'image/jpeg',
@@ -70,6 +70,7 @@ $wgVipsOptions = [
 		],
 		'sharpen' => ['radius' => 0, 'sigma' => 0.4],
 		'bilinear' => false,
+		'optimize' => '[Q=70,optimize_coding,strip=true]',
 	],
 	// Other jpeg files
 	[
@@ -78,6 +79,7 @@ $wgVipsOptions = [
 		],
 		'sharpen' => false,
 		'bilinear' => false,
+		'optimize' => '[Q=70,optimize_coding,strip=true]',
 	],
 	// Do a simple shrink for PNGs
 	[
@@ -86,6 +88,7 @@ $wgVipsOptions = [
 		],
 		'sharpen' => false,
 		'bilinear' => false,
+		'optimize' => '[compression=9,effort=10,strip=true]',
 	],
 	[
 		'conditions' => [
@@ -234,11 +237,15 @@ $wgLanguageSelectorLocation = 3; // LANGUAGE_SELECTOR_AS_PORTLET;
 wfLoadExtension('Lockdown');
 $wgActionLockdown['history'] = ['user'];
 $wgSpecialPageLockdown['Export'] = ['user'];
+$wgSpecialPageLockdown['Log'] = ['user'];
 $wgSpecialPageLockdown['Recentchanges'] = ['user'];
 $wgSpecialPageLockdown['Recentchangeslinked'] = ['user'];
 $wgSpecialPageLockdown['Whatlinkshere'] = ['user'];
 $wgSpecialPageLockdown['PagesWithSameName'] = ['user'];
 $wgSpecialPageLockdown['PageHistory'] = ['user'];
+$wgSpecialPageLockdown['PageProperty'] = ['user'];
+$wgSpecialPageLockdown['Categories'] = ['user'];
+$wgSpecialPageLockdown['Browse'] = ['user'];
 
 wfLoadExtension('SimpleMathJax');
 
