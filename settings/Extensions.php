@@ -236,16 +236,19 @@ $wgLanguageSelectorLocation = 3; // LANGUAGE_SELECTOR_AS_PORTLET;
 
 wfLoadExtension('Lockdown');
 $wgActionLockdown['history'] = ['user'];
-$wgSpecialPageLockdown['Export'] = ['user'];
-$wgSpecialPageLockdown['Log'] = ['user'];
 $wgSpecialPageLockdown['Recentchanges'] = ['user'];
-$wgSpecialPageLockdown['Recentchangeslinked'] = ['user'];
 $wgSpecialPageLockdown['Whatlinkshere'] = ['user'];
+$wgSpecialPageLockdown['Log'] = ['user'];
+$wgSpecialPageLockdown['Categories'] = ['user'];
+$wgSpecialPageLockdown['Contributions'] = ['user'];
+$wgSpecialPageLockdown['Recentchangeslinked'] = ['user'];
+$wgSpecialPageLockdown['Browse'] = ['user'];
+$wgSpecialPageLockdown['Listusers'] = ['user'];
+$wgSpecialPageLockdown['PageProperty'] = ['user'];
+$wgSpecialPageLockdown['SearchByProperty'] = ['user'];
+$wgSpecialPageLockdown['Export'] = ['user'];
 $wgSpecialPageLockdown['PagesWithSameName'] = ['user'];
 $wgSpecialPageLockdown['PageHistory'] = ['user'];
-$wgSpecialPageLockdown['PageProperty'] = ['user'];
-$wgSpecialPageLockdown['Categories'] = ['user'];
-$wgSpecialPageLockdown['Browse'] = ['user'];
 
 wfLoadExtension('SimpleMathJax');
 

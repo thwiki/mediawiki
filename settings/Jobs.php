@@ -21,6 +21,8 @@ $wgJobTypesExcludedFromDefaultQueue = [
 	//'recentChangesUpdate',
 	//'smw.changePropagationClassUpdate',
 	//'SMW\RefreshJob',
+	//'cirrusSearchLinksUpdate',
 	//'cirrusSearchMassIndex',
 	//'cirrusSearchElasticaWrite',
+	//'cirrusSearchIncomingLinkCount',
 ];
