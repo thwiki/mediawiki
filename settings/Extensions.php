@@ -110,7 +110,6 @@ require_once "$IP/extensions/Achievements/Achievements.php";
 wfLoadExtension('AnalyzePage');
 
 wfLoadExtension('Arrays');
-$egArraysCompatibilityMode = true;
 
 wfLoadExtension('AskTrack');
 
