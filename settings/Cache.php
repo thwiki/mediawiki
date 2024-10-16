@@ -36,4 +36,4 @@ $wgUseFileCache = true;
 $wgUseGzip = true;
 $wgFileCacheDirectory = "${IP}_cache";
 # When you make changes to this configuration file, this will make sure that cached pages are cleared.
-$wgInvalidateCacheOnLocalSettingsChange = false;
+$wgInvalidateCacheOnLocalSettingsChange = true;

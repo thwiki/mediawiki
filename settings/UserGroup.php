@@ -7,7 +7,7 @@ if (!defined('MEDIAWIKI')) {
 }
 
 # 自动确认时间
-$wgAutoConfirmAge = 86400 * 5; //3days
+$wgAutoConfirmAge = 86400 * 5; // 5 days
 $wgAutoConfirmCount = 10;
 
 $wgRestrictionLevels = ['', 'autoconfirmed', 'confirmed', 'textop', 'sysop', 'bot-only', 'edit-mainpage', 'extensive'];
@@ -17,6 +17,7 @@ $wgRestrictionLevels = ['', 'autoconfirmed', 'confirmed', 'textop', 'sysop', 'bo
 $wgGroupPermissions['*']['edit'] = false;
 $wgGroupPermissions['*']['skipcaptcha'] = false;
 $wgGroupPermissions['*']['comment'] = false;
+#$wgGroupPermissions['*']['createaccount'] = false;
 
 ## 机器人
 $wgGroupPermissions['bot']['skipcaptcha'] = true;

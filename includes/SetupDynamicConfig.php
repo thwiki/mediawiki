@@ -75,10 +75,10 @@ if ( isset( $wgFooterIcons['poweredby'] )
 	&& $wgFooterIcons['poweredby']['mediawiki']['src'] === null
 ) {
 	$wgFooterIcons['poweredby']['mediawiki']['src'] =
-		"https://static.thwiki.cc/common/poweredby_mediawiki_88x31.png";
+		"https://static.thbwiki.cc/common/poweredby_mediawiki_88x31.png";
 	$wgFooterIcons['poweredby']['mediawiki']['srcset'] =
-		"https://static.thwiki.cc/common/poweredby_mediawiki_132x47.png 1.5x, " .
-		"https://static.thwiki.cc/common/poweredby_mediawiki_176x62.png 2x";
+		"https://static.thbwiki.cc/common/poweredby_mediawiki_132x47.png 1.5x, " .
+		"https://static.thbwiki.cc/common/poweredby_mediawiki_176x62.png 2x";
 }
 
 /**

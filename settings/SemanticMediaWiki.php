@@ -33,7 +33,7 @@ $smwgQUpperbound = 20000; // Max Offset
 $smwgQPrintoutLimit = 100; // Max Printouts
 $smwgBrowseFeatures = $smwgBrowseFeatures | SMW_BROWSE_SHOW_INVERSE;
 
-//$smwgChangePropagationProtection = false;
+$smwgChangePropagationProtection = false;
 
 $smwgNamespacesWithSemanticLinks = [
 	NS_MAIN => true,

@@ -26,3 +26,6 @@ $wgEnotifWatchlist = false; # 用户自行设定
 
 ## 验证用户邮箱
 $wgEmailAuthentication = true;
+
+## 编辑页面需要验证邮箱
+$wgEmailConfirmToEdit = true;

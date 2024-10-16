@@ -23,21 +23,6 @@ $wgEditPageFrameOptions = false;
 ## 关闭输出压缩，压缩改由NGINX完成
 $wgDisableOutputCompression = true;
 
-## 设置使用NGINX前台
-$wgUseCdn = true;
-
-## 仅允许本机及指定加速服务器前台
-$wgCdnServers = [];
-$wgCdnServers[] = "127.0.0.1"; // localhost
-
-$wgCdnServersNoPurge = [];
-$wgCdnServersNoPurge[] = "127.0.0.1";
-$wgCdnServersNoPurge[] = "172.104.65.133";
-
-$wgCdnServersPurgeExtraHeaders = [
-	'X-Edge-Purge-Key' => $wgCdnServersPurgeExtraHeadersXEdgePurgeKey,
-];
-
 ## 允许Schema更新
 $wgAllowSchemaUpdates = true;
 
@@ -46,4 +31,4 @@ $wgWhitelistRead = [];
 $wgWhitelistReadRegexp = [];
 
 # 跨站AJAX域名白名单
-$wgCrossSiteAJAXdomains = ['upload.thwiki.cc', 'test.thwiki.cc', 'tool.thwiki.cc', 'touhou.cd', 'cd.thwiki.cc', 'cdtest.thwiki.cc'];
+$wgCrossSiteAJAXdomains = ['test.thwiki.cc', 'tool.thwiki.cc', 'touhou.cd', 'cd.thwiki.cc', 'cdtest.thwiki.cc'];

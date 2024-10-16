@@ -55,7 +55,7 @@ $wgAllowTitlesInSVG = false;
 #将图片与wiki源程序分开，并使用不同的域名
 $wgUploadDirectory = "${IP}_upload"; //图片被上传到的绝对路径
 $wgImageMagickTempDir = "${wgUploadDirectory}/imtemp";
-$wgUploadPath = "https://upload.thwiki.cc"; //图片相对URL路径
+$wgUploadPath = "https://upload.thbwiki.cc"; //图片相对URL路径
 # InstantCommons allows wiki to use images from http://commons.wikimedia.org
 $wgUseInstantCommons = true;
 $wgCommonsMetadataForceRecalculate = true;
@@ -72,15 +72,15 @@ $wgSVGConverters = [
 $wgRightsPage = ""; # Set to the title of a wiki page that describes your license/copyright
 $wgRightsUrl = "https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh";
 $wgRightsText = "";
-$wgRightsIcon = "https://static.thwiki.cc/common/CC-BY-NC-SA88x31.png";
+$wgRightsIcon = "https://static.thbwiki.cc/common/CC-BY-NC-SA88x31.png";
 
 #底部图标
 $wgFooterIcons['poweredby']['myicon'] = [
-	"src" => "https://static.thwiki.cc/banner/banner_b0.png",
-	"srcset" => "https://static.thwiki.cc/banner/banner_b0@2x.png 2x",
+	"src" => "https://static.thbwiki.cc/banner/banner_b0.png",
+	"srcset" => "https://static.thbwiki.cc/banner/banner_b0@2x.png 2x",
 	"url" => "https://thwiki.cc/",
 	"alt" => "由TBSGroup建立的专业性东方Project维基百科",
 ];
 
-$wgShowExceptionDetails = true;
+$wgShowExceptionDetails = false;
 $wgAjaxEditStash = false;

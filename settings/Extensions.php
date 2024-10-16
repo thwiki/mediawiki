@@ -10,6 +10,8 @@ if (!defined('MEDIAWIKI')) {
 # wfLoadExtensions('ExtensionName');
 # to LocalSettings.php. Check specific extension documentation for more details.
 
+wfLoadExtension('AbuseFilter');
+
 wfLoadExtension('Cite');
 
 wfLoadExtension('CiteThisPage');
@@ -125,10 +127,14 @@ wfLoadExtension('CharInsert');
 
 wfLoadExtension('CheckUser');
 
+wfLoadExtension('Cloudflare');
+$wgCloudflarePurgePage = false;
+$wgCloudflarePurgeFile = true;
+
 wfLoadExtension('ChineseNumerals');
 
 wfLoadExtension('CollisionManager');
-$wgCollisionManagerDisambigIcon = 'https://static.thwiki.cc/template/disambig.svg';
+$wgCollisionManagerDisambigIcon = 'https://static.thbwiki.cc/template/disambig.svg';
 $wgCollisionManagerRulePriorities = [
 	'官方游戏' => 1,
 	'官方书籍' => 2,
@@ -214,8 +220,8 @@ wfLoadExtension('Flow');
 $wgFlowContentFormat = 'html';
 
 wfLoadExtension('FlowThread');
-$wgFlowThreadConfig['AnonymousAvatar'] = 'https://avatar.thwiki.cc/default_ml.jpg';
-$wgFlowThreadConfig['Avatar'] = 'https://avatar.thwiki.cc/thwikicc_wiki_${userid}_ml.jpg';
+$wgFlowThreadConfig['AnonymousAvatar'] = 'https://avatar.thbwiki.cc/default_ml.jpg';
+$wgFlowThreadConfig['Avatar'] = 'https://avatar.thbwiki.cc/thwikicc_wiki_${userid}_ml.jpg';
 $wgFlowThreadConfig['MaxNestLevel'] = 3;
 $wgFlowThreadConfig['PopularPostCount'] = 3;
 $wgFlowThreadConfig['PopularPostThreshold'] = 3;
@@ -248,6 +254,12 @@ $wgSpecialPageLockdown['SearchByProperty'] = ['user'];
 $wgSpecialPageLockdown['Export'] = ['user'];
 $wgSpecialPageLockdown['PagesWithSameName'] = ['user'];
 $wgSpecialPageLockdown['PageHistory'] = ['user'];
+$wgSpecialPageLockdown['Protectedpages'] = ['textop', 'sysop'];
+$wgSpecialPageLockdown['Protectedtitles'] = ['textop', 'sysop'];
+$wgSpecialPageLockdown['BlockList'] = ['textop', 'sysop'];
+$wgSpecialPageLockdown['AutoblockList'] = ['textop', 'sysop'];
+$wgSpecialPageLockdown['AbuseLog'] = ['textop', 'sysop'];
+$wgSpecialPageLockdown['AbuseFilter'] = ['textop', 'sysop'];
 
 wfLoadExtension('SimpleMathJax');
 
@@ -342,7 +354,7 @@ wfLoadExtension('ReplaceText');
 
 require_once "$IP/extensions/SocialProfile/SocialProfile.php";
 //Avatar
-$wgAvatarPath = 'https://avatar.thwiki.cc/';
+$wgAvatarPath = 'https://avatar.thbwiki.cc/';
 //Friends/Foes
 $wgUserProfileDisplay['friends'] = true;
 $wgUserProfileDisplay['foes'] = true;
@@ -368,6 +380,15 @@ $wgUpdateProfileInRecentChanges = true;
 $wgAvatarKey = 'thwikicc_wiki';
 
 $wgNamespacesWithSubpages[NS_USER_WIKI] = true;
+
+wfLoadExtension('SpamBlacklist');
+$wgBlacklistSettings = [
+	'email' => [
+		'files' => [
+			"$IP/settings/secrets/EmailBlacklist.txt"
+		],
+	],
+];
 
 wfLoadExtension('TabberNeue');
 
