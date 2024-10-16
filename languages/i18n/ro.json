@@ -54,7 +54,9 @@
 			"Amire80",
 			"Alesaru",
 			"Heron702",
-			"Iketsi"
+			"Iketsi",
+			"Matma Rex",
+			"Paloi Sciurala"
 		]
 	},
 	"tog-underline": "Sublinierea legăturilor:",
@@ -181,7 +183,7 @@
 	"article": "Articol",
 	"newwindow": "(se deschide într-o fereastră nouă)",
 	"cancel": "Revocare",
-	"moredotdotdot": "Mai mult…",
+	"moredotdotdot": "Mai mult...",
 	"morenotlisted": "Această listă ar putea fi incompletă.",
 	"mypage": "Pagină",
 	"mytalk": "Discuții",
@@ -431,7 +433,7 @@
 	"logout-failed": "Nu se poate face dezautentificarea acum: $1",
 	"cannotlogoutnow-title": "Nu se poate deconecta acum",
 	"cannotlogoutnow-text": "Deconectarea nu este posibilă când se utilizează $1.",
-	"welcomeuser": "Bun venit, $1!",
+	"welcomeuser": "Bun-venit, $1!",
 	"welcomecreation-msg": "Contul dumneavoastră a fost creat.\nNu uitați să vă modificați [[Special:Preferences|preferințele]] pentru {{SITENAME}}.",
 	"yourname": "Nume de utilizator:",
 	"userlogin-yourname": "Nume de utilizator",
@@ -3909,7 +3911,7 @@
 	"log-action-filter-suppress-revision": "Ștergere versiune",
 	"log-action-filter-suppress-delete": "Ștergere pagină",
 	"log-action-filter-suppress-block": "Supresiunea utilizatorului după blocare",
-	"log-action-filter-suppress-reblock": "Supresiunea utilizatorului după blocare",
+	"log-action-filter-suppress-reblock": "User suppression by reblock",
 	"log-action-filter-upload-upload": "Încărcare nouă",
 	"log-action-filter-upload-overwrite": "Reîncărcare",
 	"log-action-filter-upload-revert": "Anulare",

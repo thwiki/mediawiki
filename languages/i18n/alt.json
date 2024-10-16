@@ -14,7 +14,8 @@
 			"Толуш",
 			"아라",
 			"Bakpay",
-			"Batiye"
+			"Batiye",
+			"Matma Rex"
 		]
 	},
 	"tog-underline": "Тайанты алдын чийе тартар:",
@@ -389,7 +390,7 @@
 	"cannotlogoutnow-title": "Эмдиле чыгарга јарабас",
 	"cannotlogoutnow-text": "$1 эдинип турза чыгарга јарабас.",
 	"welcomeuser": "Кӱӱнзеп кирер, $1!",
-	"welcomecreation-msg": "Слердиҥ аккаунтар эдилди.\nЭмди слер {{SITENAME}} сайтта  [[Special:Preferences|персональный јазалталар]] эдер аргалу.",
+	"welcomecreation-msg": "Слердиҥ аккаунтар эдилди.\nЭмди слер {{SITENAME}} сайтта [[Special:Preferences|персональный јазалталар]] эдер аргалу.",
 	"yourname": "Туружаачы:",
 	"userlogin-yourname": "Туружаачы",
 	"userlogin-yourname-ph": "Адарды кийдирер",
@@ -2645,7 +2646,7 @@
 	"blocklist-editing-action": "кылыныш",
 	"ipblocklist-empty": "Туйукташтыҥ тизими куру.",
 	"ipblocklist-no-results": "Бичилген IP-адреске эмезе туружаачыныҥ адына келижип турган туйукташ табылбады.",
-	"blocklink": "Блокировка эдер",
+	"blocklink": "блокировка эдер",
 	"unblocklink": "блокировканы јоголтор",
 	"change-blocklink": "блокировканы солыыр",
 	"empty-username": "(туружаачыныҥ ады јок)",
@@ -3191,7 +3192,7 @@
 	"watchlistedit-normal-done": "Слердиҥ ширтениҥ тизиминеҥ $1 {{PLURAL:$1|бичимел}} кырылган:",
 	"watchlistedit-raw-title": "Ширтениҥ тизимин текст этире тӱзедери",
 	"watchlistedit-raw-legend": "Ширтениҥ тизимин текст этире тӱзедери",
-	"watchlistedit-raw-explain": "Слердиҥ ширтениҥ тизимине кирген бӱктер алдында кӧргӱзилди. Слер, бир ат бир јолдыкта, јолдыктарды кожып эмезе айрып, бу тизимди солыыр аргалу.  \nТӱзедӱни эткен кийнинде \"{{int:Watchlistedit-raw-submit}}\" былчууны былчыгар.\nАнайда ок, слер [[Special:EditWatchlist|тӱзедиштиҥ текши јепселин эдинер]].",
+	"watchlistedit-raw-explain": "Слердиҥ ширтениҥ тизимине кирген бӱктер алдында кӧргӱзилди. Слер, бир ат бир јолдыкта, јолдыктарды кожып эмезе айрып, бу тизимди солыыр аргалу.\nТӱзедӱни эткен кийнинде \"{{int:Watchlistedit-raw-submit}}\" былчууны былчыгар.\nАнайда ок, слер [[Special:EditWatchlist|тӱзедиштиҥ текши јепселин эдинер]].",
 	"watchlistedit-raw-titles": "Бажалыктар:",
 	"watchlistedit-raw-submit": "Ширтениҥ тизимин јаҥыртар",
 	"watchlistedit-raw-done": "Слердиҥ ширтениҥ тизими јаҥыртылган.",
