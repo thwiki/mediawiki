@@ -108,6 +108,25 @@ class BlockLevelPass {
 	}
 
 	/**
+	 * Normalize prefix character.
+	 *
+	 * THBWiki 1.39 fork: `*b` is the ordinary blue bullet, `*d`/`*c`/`*s`/`*x`
+	 * select the disc/circle/square/cross bullet styles used by the skins.
+	 *
+	 * @param string $prefix
+	 * @return string
+	 */
+	public static function normalizePrefix( $prefix ) {
+		return strtr( $prefix, [
+			'*b' => '*',
+			'*d' => 'd',
+			'*c' => 'c',
+			'*s' => 's',
+			'*x' => 'x',
+		] );
+	}
+
+	/**
 	 * Open the list item element identified by the prefix character.
 	 *
 	 * @param string $char
@@ -126,6 +145,8 @@ class BlockLevelPass {
 		} elseif ( $char === ';' ) {
 			$result .= "<dl><dt>";
 			$this->DTopen = true;
+		} elseif ( strpos( 'dcsx', $char ) !== false ) {
+			$result .= "<ul><li class=\"$char\">";
 		} else {
 			$result = '<!-- ERR 1 -->';
 		}
@@ -154,6 +175,8 @@ class BlockLevelPass {
 				$this->DTopen = false;
 				return $close . '<dd>';
 			}
+		} elseif ( strpos( 'dcsx', $char ) !== false ) {
+			return "</li>\n<li class=\"$char\">";
 		}
 		return '<!-- ERR 2 -->';
 	}
@@ -165,7 +188,7 @@ class BlockLevelPass {
 	 * @return string
 	 */
 	private function closeList( $char ) {
-		if ( $char === '*' ) {
+		if ( $char === '*' || strpos( 'dcsx', $char ) !== false ) {
 			$text = "</li></ul>";
 		} elseif ( $char === '#' ) {
 			$text = "</li></ol>";
@@ -221,15 +244,20 @@ class BlockLevelPass {
 			# If not in a <pre> element, scan for and figure out what prefixes are there.
 			if ( !$this->inPre ) {
 				# Multiple prefixes may abut each other for nested lists.
-				$prefixLength = strspn( $inputLine, '*#:;' );
-				$prefix = substr( $inputLine, 0, $prefixLength );
+				# THBWiki 1.39 fork: allow *b/*d/*c/*s/*x bullet variants and
+				# normalize them before the list open/close bookkeeping.
+				$m = [];
+				preg_match( '/^(\*([bdcsx](?=$| |\*|#|:|;))?|#|:|;)*/u', $inputLine, $m );
+				$prefixRaw = $m[0] ?? '';
+				$prefix = self::normalizePrefix( $prefixRaw );
+				$prefixLength = strlen( $prefix );
 
 				# eh?
 				# ; and : are both from definition-lists, so they're equivalent
 				#  for the purposes of determining whether or not we need to open/close
 				#  elements.
-				$prefix2 = str_replace( ';', ':', $prefix );
-				$t = substr( $inputLine, $prefixLength );
+				$prefix2 = strtr( $prefix, ';dcsx', ':****' );
+				$t = substr( $inputLine, strlen( $prefixRaw ) );
 				$this->inPre = (bool)$preOpenMatch;
 			} else {
 				# Don't interpret any other prefixes in preformatted text
