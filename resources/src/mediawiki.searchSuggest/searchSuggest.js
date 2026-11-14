@@ -50,13 +50,19 @@
 				formatversion: 2,
 				action: 'opensearch',
 				search: query,
+				// THBWiki: 让 API 把重定向显示成「来源 → 目标」，与主站一致
+				redirects: 'display',
 				namespace: namespace || searchNS,
 				limit
 			} ).done( ( data, jqXHR ) => {
+				// THBWiki: keep the opensearch descriptions/urls so the renderer can
+				// show the page snippet, as the 1.39 fork did.
 				response( data[ 1 ], {
 					type: jqXHR.getResponseHeader( 'X-OpenSearch-Type' ),
 					searchId: jqXHR.getResponseHeader( 'X-Search-ID' ),
-					query
+					query,
+					descriptions: data[ 2 ],
+					urls: data[ 3 ]
 				} );
 			} );
 		}
@@ -178,13 +184,26 @@
 			} );
 
 			// this is the container <div>, jQueryfied
-			this.text( text );
+			const meta = context.data.renderMeta;
+			const descIndex = context.config.suggestions.indexOf( text );
+			this.empty();
+			this.append( $( '<div>', { class: 'suggestions-text' } ).text( text ) );
+			if ( meta && meta.descriptions && meta.descriptions[ descIndex ] ) {
+				this.append(
+					$( '<div>', { class: 'suggestions-desc' } ).text( meta.descriptions[ descIndex ] )
+				);
+			}
 
 			// wrap only as link, if the config doesn't disallow it
 			if ( textboxConfig.wrapAsLink !== false ) {
+				// THBWiki: 优先用 API 返回的目标页面 URL（重定向时指向目标词条），
+				// 与主站一致；没有 urls 时才退回“按文本搜索”的 URL。
+				const href = meta && meta.urls && meta.urls[ descIndex ] ?
+					meta.urls[ descIndex ] :
+					formData.baseHref + $.param( formData.linkParams );
 				this.wrap(
 					$( '<a>' )
-						.attr( 'href', formData.baseHref + $.param( formData.linkParams ) )
+						.attr( 'href', href )
 						.attr( 'title', text )
 						.addClass( 'mw-searchSuggest-link' )
 				);

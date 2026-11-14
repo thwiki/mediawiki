@@ -93,6 +93,10 @@
 				// Try cache first
 				if ( context.config.cache && val in cache ) {
 					if ( mw.now() - cache[ val ].timestamp < context.config.cacheMaxAge ) {
+						// THBWiki: 缓存命中时也要恢复该查询自己的 metadata。
+						// 否则 renderMeta 还停在上一次查询上，渲染器会拿旧查询的描述/URL
+						// （表现为标题是新的、点进去却是上一个搜索词的结果）。
+						context.data.renderMeta = cache[ val ].metadata;
 						context.data.$textbox.suggestions( 'suggestions', cache[ val ].suggestions );
 						if ( typeof context.config.update.after === 'function' ) {
 							context.config.update.after.call( context.data.$textbox, cache[ val ].metadata );
@@ -108,6 +112,8 @@
 						context.data.$textbox,
 						val,
 						( suggestions, metadata ) => {
+							// THBWiki: expose the fetch metadata (descriptions/urls) to renderers.
+							context.data.renderMeta = metadata;
 							suggestions = suggestions.slice( 0, context.config.maxRows );
 							context.data.$textbox.suggestions( 'suggestions', suggestions );
 							if ( typeof context.config.update.after === 'function' ) {
@@ -758,6 +764,17 @@
 						) {
 							keypress( e, context, context.data.keypressed );
 						}
+					} )
+					// THBWiki: IME composition does not fire keypress, so also react to
+					// plain input events and the end of a composition.
+					.on( 'input', ( e ) => {
+						if ( e.originalEvent && e.originalEvent.isComposing ) {
+							return;
+						}
+						update( context, true );
+					} )
+					.on( 'compositionend', () => {
+						update( context, true );
 					} )
 					.on( 'blur', () => {
 						// When losing focus because of a mousedown
