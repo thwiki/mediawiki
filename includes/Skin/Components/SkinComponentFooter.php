@@ -234,11 +234,8 @@ class SkinComponentFooter implements SkinComponent {
 					'a',
 					[
 						'href' => $url,
-						// Using a fake Codex link button, as this is the long-expected UX; our apologies.
-						'class' => [
-							'cdx-button', 'cdx-button--fake-button',
-							'cdx-button--size-large', 'cdx-button--fake-button--enabled'
-						],
+						// [thwiki 1.46] 不套 Codex fake button（1.39 的页脚图标是普通 <a>），
+						// 否则按钮内边距会把 #footer-icons 高度从 47px 撑到 61px 并换行。
 						'target' => $config->get( MainConfigNames::ExternalLinkTarget ),
 					],
 					$html

@@ -89,18 +89,12 @@ if ( isset( $wgFooterIcons['poweredby'] )
 	&& is_array( $wgFooterIcons['poweredby']['mediawiki'] )
 	&& $wgFooterIcons['poweredby']['mediawiki']['src'] === null
 ) {
-	$compactLogo = "$wgResourceBasePath/resources/assets/mediawiki_compact.svg";
-	$wgFooterIcons['poweredby']['mediawiki']['sources'] = [
-		[
-			"media" => "(min-width: 500px)",
-			"srcset" => "$wgResourceBasePath/resources/assets/poweredby_mediawiki.svg",
-			"width" => 88,
-			"height" => 31,
-		]
-	];
-	$wgFooterIcons['poweredby']['mediawiki']['src'] = $compactLogo;
-	$wgFooterIcons['poweredby']['mediawiki']['width'] = 25;
-	$wgFooterIcons['poweredby']['mediawiki']['height'] = 25;
+	// [thwiki 本地定制，1.39 起] 使用 static 上的 88x31 PNG 徽章（含 1.5x/2x srcset）
+	$wgFooterIcons['poweredby']['mediawiki']['src'] =
+		"https://static.thbwiki.cc/common/poweredby_mediawiki_88x31.png";
+	$wgFooterIcons['poweredby']['mediawiki']['srcset'] =
+		"https://static.thbwiki.cc/common/poweredby_mediawiki_132x47.png 1.5x, " .
+		"https://static.thbwiki.cc/common/poweredby_mediawiki_176x62.png 2x";
 }
 
 // Unconditional protection for NS_MEDIAWIKI since otherwise it's too easy for a
