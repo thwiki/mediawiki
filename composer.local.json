@@ -1,0 +1,12 @@
+{
+	"extra": {
+		"merge-plugin": {
+			"include": []
+		}
+	},
+	"require": {
+		"mediawiki/semantic-media-wiki": "7.4.0",
+		"mediawiki/semantic-result-formats": "6.0.1",
+		"mediawiki/semantic-scribunto": "3.0.0"
+	}
+}

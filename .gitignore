@@ -94,3 +94,14 @@ Thumbs.db
 docker-compose.override.yml
 .env
 .devcontainer/*
+# THBWiki 本地/部署文件（与生产 .gitignore 口径一致）
+/LocalSettings.*.php
+/settings/secrets
+/extensions/*/
+/skins/*/
+/vendor
+album.php
+ajax.php
+ajax2.php
+/lockdown-*
+error_log
