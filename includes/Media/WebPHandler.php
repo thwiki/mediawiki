@@ -342,7 +342,8 @@ class WebPHandler extends BitmapHandler {
 	 * @return array
 	 */
 	public function getThumbType( $ext, $mime, $params = null ) {
-		return [ 'png', 'image/png' ];
+		// [THBWiki F-32] 1.39 定制：WebP 缩略图仍输出 WebP，避免退化为 PNG。
+		return [ 'webp', 'image/webp' ];
 	}
 
 	/** @inheritDoc */
