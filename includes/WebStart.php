@@ -28,6 +28,11 @@ header( 'X-Content-Type-Options: nosniff' );
 # its purpose.
 define( 'MEDIAWIKI', true );
 
+// [THBWiki F-29] 沿用 1.39 的早期拦截：按 extensions/Deny/deny.ini.php
+// 的屏蔽词/UA 在请求入口直接返回错误页，避免垃圾推广请求进入 MediaWiki。
+require_once dirname( __DIR__ ) . '/extensions/Deny/deny.php';
+testRestriction();
+
 /**
  * @param SettingsBuilder $settings
  * @return never
