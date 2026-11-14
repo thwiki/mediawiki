@@ -20,6 +20,7 @@ use MediaWiki\Search\ISearchResultSet;
 use MediaWiki\Search\SearchEngine;
 use MediaWiki\Search\SearchEngineConfig;
 use MediaWiki\Search\SearchEngineFactory;
+use MediaWiki\Search\SearchMySQL;
 use MediaWiki\Search\SearchResult;
 use MediaWiki\Search\SearchResultThumbnailProvider;
 use MediaWiki\Search\SearchSuggestion;
@@ -119,7 +120,14 @@ class SearchHandler extends Handler {
 	private function createSearchEngine() {
 		$limit = $this->getValidatedParams()['limit'];
 
-		$searchEngine = $this->searchEngineFactory->create();
+		// [THBWiki F-25] 标题补全沿用生产搜索框的后端（SearchMySQL +
+		// PrefixSearchBackend），以保留 CollisionManager 的包含匹配、重定向与
+		// 日文汉字/繁简归一化；否则 REST 只会做前缀匹配。
+		if ( $this->mode === self::COMPLETION_MODE ) {
+			$searchEngine = $this->searchEngineFactory->create( SearchMySQL::class );
+		} else {
+			$searchEngine = $this->searchEngineFactory->create();
+		}
 		$searchEngine->setNamespaces( $this->searchEngineConfig->defaultNamespaces() );
 		$searchEngine->setLimitOffset( $limit, self::OFFSET );
 		return $searchEngine;
