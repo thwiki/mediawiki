@@ -165,15 +165,19 @@ class HandleSectionLinks extends ContentTextTransformStage {
 			$fallback = "<span id=\"$fallbackAnchor\"></span>";
 		}
 
+		// THBWiki: restore the 1.39 <span class="mw-headline"> wrapper so that
+		// site CSS / gadgets targeting .mw-headline keep working (T-1.46 removal).
+		$headline = '<span class="mw-headline">' . $html . '</span>';
+
 		switch ( $wrapperType ) {
 			case 'mwheading':
+				// THBWiki: keep the editsection inside the heading element, as in 1.39,
+				// so it stays on the same line even when the skin renders hN as block.
 				return "<div class=\"mw-heading mw-heading$level\">"
-					. "<h$level$idAttr" . Html::expandAttributes( $attrs ) . ">$fallback$html</h$level>"
-					. $link
+					. "<h$level$idAttr" . Html::expandAttributes( $attrs ) . ">$fallback$headline$link</h$level>"
 					. "</div>";
 			case 'none':
-				return "<h$level$idAttr" . Html::expandAttributes( $attrs ) . ">$fallback$html</h$level>"
-					. $link;
+				return "<h$level$idAttr" . Html::expandAttributes( $attrs ) . ">$fallback$headline$link</h$level>";
 			default:
 				throw new LogicException( "Bad wrapper type: $wrapperType" );
 		}
