@@ -689,6 +689,13 @@ class ActionEntryPoint extends MediaWikiEntryPoint {
 						$context->setWikiPage( $article->getPage() );
 					}
 				}
+			} else {
+				// [THBWiki F-13] Article may have been changed by hook
+				// (e.g. CustomRedirect short URL /-/<id> resolving to an existing page).
+				// 1.39 did this unconditionally; 1.46 dropped it, leaving $context with the
+				// original non-existent title (page tabs showed "创建", ca-viewsource, etc).
+				$context->setTitle( $article->getTitle() );
+				$context->setWikiPage( $article->getPage() );
 			}
 		}
 
