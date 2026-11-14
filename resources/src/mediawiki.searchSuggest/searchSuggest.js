@@ -219,6 +219,8 @@
 			this.append( $( '<div>', { class: 'suggestions-text' } ).text( text ) );
 			this.append( $( '<div>', { class: 'suggestions-desc' } ).text( desc ) );
 			this.data( 'text', text );
+			var url = new URL(link);
+			this.data( 'link', decodeURIComponent(url.pathname.slice(1)) );
 
 			// wrap only as link, if the config doesn't disallow it
 			if ( textboxConfig.wrapAsLink !== false ) {
@@ -244,6 +246,9 @@
 					numberOfResults: context.config.suggestions.length,
 					index: context.config.suggestions.indexOf( text )
 				} );
+			} if ( source === 'keyboard' ) {
+				var link = this.data( 'link' )
+				$input.val( link );
 			}
 
 			// allow the form to be submitted

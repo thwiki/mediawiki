@@ -541,7 +541,7 @@
 			// Arrow down
 			case 40:
 				if ( wasVisible ) {
-					highlight( context, 'next', true );
+					highlight( context, 'next', false );
 					context.data.selectedWithMouse = false;
 				} else {
 					update( context, false );
@@ -551,7 +551,7 @@
 			// Arrow up
 			case 38:
 				if ( wasVisible ) {
-					highlight( context, 'prev', true );
+					highlight( context, 'prev', false );
 					context.data.selectedWithMouse = false;
 				}
 				preventDefault = wasVisible;
