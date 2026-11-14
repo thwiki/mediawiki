@@ -22,6 +22,9 @@ define("NS_LYRICS", 512);
 define("NS_LYRICS_TALK", 513);
 $wgExtraNamespaces[NS_LYRICS] = "歌词";
 $wgExtraNamespaces[NS_LYRICS_TALK] = "歌词讨论";
+#模块
+define("NS_MODULE", 828);
+define("NS_MODULE_TALK", 829);
 
 # 保护名字空间
 $wgNamespaceProtection[NS_OMAKE] = ["editOmake"];
@@ -30,6 +33,7 @@ $wgNamespaceProtection[NS_LYRICS] = ["editLyrics"];
 $wgNamespaceProtection[NS_PROJECT] = ["editPROJECT"];
 $wgNamespaceProtection[NS_HELP] = ["editHELP"];
 $wgNamespaceProtection[NS_TEMPLATE] = ["editTEMPLATE"];
+$wgNamespaceProtection[NS_MODULE] = ["editMODULE"];
 
 $wgNamespaceProtection[102] = ["editPROPERTY"];
 $wgNamespaceProtection[108] = ["editPROPERTY"];
@@ -45,6 +49,7 @@ $wgNamespaceContentModels[NS_CATEGORY_TALK] = 'flow-board';
 $wgNamespaceContentModels[NS_OMAKE_TALK] = 'flow-board';
 $wgNamespaceContentModels[NS_GDIALOGUE_TALK] = 'flow-board';
 $wgNamespaceContentModels[NS_LYRICS_TALK] = 'flow-board';
+$wgNamespaceContentModels[NS_MODULE_TALK] = 'flow-board';
 
 //子页面
 $wgNamespacesWithSubpages[NS_MAIN] = true;
@@ -54,6 +59,7 @@ $wgNamespacesWithSubpages[NS_LYRICS] = false;
 $wgNamespacesWithSubpages[NS_PROJECT] = true;
 $wgNamespacesWithSubpages[NS_HELP] = true;
 $wgNamespacesWithSubpages[NS_TEMPLATE] = true;
+$wgNamespacesWithSubpages[NS_MODULE] = true;
 
 $wgContentNamespaces = [NS_MAIN, NS_OMAKE, NS_GDIALOGUE, NS_LYRICS];
 $wgSitemapNamespaces = [NS_MAIN, NS_USER, NS_PROJECT, NS_FILE, NS_HELP, NS_OMAKE, NS_GDIALOGUE, NS_LYRICS];
@@ -82,4 +88,6 @@ $wgNamespacesToBeSearchedDefault = [
 	NS_GDIALOGUE_TALK => false,
 	NS_LYRICS => true,
 	NS_LYRICS_TALK => false,
+	NS_MODULE => false,
+	NS_MODULE_TALK => false,
 ];

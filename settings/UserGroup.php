@@ -89,6 +89,11 @@ $wgGroupPermissions['textop']['editinterface'] = true;
 $wgGroupPermissions['textop']['textop'] = true;
 $wgGroupPermissions['textop']['titleblacklistlog'] = true;
 $wgGroupPermissions['textop']['mwoauthupdateownconsumer'] = true;
+
+$wgGroupPermissions['textop']['tablemapping-create'] = true;
+$wgGroupPermissions['textop']['tablemapping-edit'] = true;
+$wgGroupPermissions['textop']['tablemapping-replace'] = true;
+
 $wgAddGroups['sysop'][] = 'preconfirm';
 $wgRemoveGroups['sysop'][] = 'preconfirm';
 
@@ -149,6 +154,7 @@ $wgGroupPermissions['sysop']['editsitejs'] = true;
 $wgGroupPermissions['sysop']['editsitejson'] = true;
 $wgGroupPermissions['sysop']['forcepreviewexempt'] = true;
 $wgGroupPermissions['sysop']['edit-mainpage'] = true;
+$wgGroupPermissions['sysop']['manageachievements'] = true;
 $wgAddGroups['sysop'][] = 'preconfirm';
 $wgAddGroups['sysop'][] = 'confirm';
 $wgAddGroups['sysop'][] = 'textop';
@@ -220,6 +226,13 @@ $wgGroupPermissions['confirm']['editTEMPLATE'] = true;
 $wgGroupPermissions['sysop']['editTEMPLATE'] = true;
 $wgGroupPermissions['bot']['editTEMPLATE'] = true;
 
+$wgGroupPermissions['*']['editMODULE'] = false;
+$wgGroupPermissions['user']['editMODULE'] = false;
+$wgGroupPermissions['confirm']['editMODULE'] = false;
+$wgGroupPermissions['textop']['editMODULE'] = true;
+$wgGroupPermissions['sysop']['editMODULE'] = true;
+$wgGroupPermissions['bot']['editMODULE'] = true;
+
 $wgGroupPermissions['*']['editPROPERTY'] = false;
 $wgGroupPermissions['user']['editPROPERTY'] = false;
 $wgGroupPermissions['confirm']['editPROPERTY'] = false;
@@ -234,4 +247,5 @@ $wgGrantPermissions['editprotected']['editPROJECT'] = true;
 $wgGrantPermissions['editprotected']['editHELP'] = true;
 $wgGrantPermissions['editprotected']['editTEMPLATE'] = true;
 $wgGrantPermissions['editprotected']['editPROPERTY'] = true;
+$wgGrantPermissions['editprotected']['editMODULE'] = true;
 $wgGrantPermissions['editprotected']['maintenance-api'] = true;

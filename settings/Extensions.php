@@ -16,6 +16,9 @@ wfLoadExtension('Cite');
 
 wfLoadExtension('CiteThisPage');
 
+wfLoadExtension( 'CodeEditor' );
+$wgDefaultUserOptions['usebetatoolbar'] = 1;
+
 wfLoadExtensions(['ConfirmEdit', 'ConfirmEdit/QuestyCaptcha']);
 $wgCaptchaClass = 'QuestyCaptcha';
 require_once "$IP/settings/secrets/QuestyCaptcha.php";
@@ -113,7 +116,12 @@ wfLoadExtension('AnalyzePage');
 
 wfLoadExtension('Arrays');
 
+wfLoadExtension('AskBook');
 wfLoadExtension('AskTrack');
+wfLoadExtension('AskMCP');
+$wgAskMCPTrackApi = "$wgServer/rest/asktrack/v0";
+$wgAskMCPBookApi  = "$wgServer/rest/askbook/v0";
+$wgAskMCPHttpTimeout = 20;
 
 wfLoadExtension('CategorySortHeaders');
 
@@ -183,6 +191,7 @@ wfLoadExtension('Echo');
 $wgEchoShowFullNotificationsLink = true;
 $wgEchoUseJobQueue = true;
 $wgEchoEmailFooterAddress = 'TBSGroup';
+$wgDefaultUserOptions['echo-email-frequency'] = 1;
 
 wfLoadExtension('Editcount');
 
@@ -225,6 +234,10 @@ $wgFlowThreadConfig['Avatar'] = 'https://avatar.thbwiki.cc/thwikicc_wiki_${useri
 $wgFlowThreadConfig['MaxNestLevel'] = 3;
 $wgFlowThreadConfig['PopularPostCount'] = 3;
 $wgFlowThreadConfig['PopularPostThreshold'] = 3;
+require_once "$IP/settings/secrets/Baidu.php";
+$wgFlowThreadConfig['BaiduCheckLevel'] = 0; // 百度审核等级 0：不启用审核 1：仅合规 2：允许疑似不合规
+$wgFlowThreadConfig['BaiduErrorDefault'] = false; // 当百度审核失败时默认是否为SPAM true：SPAM false：正常结果
+$wgFlowThreadConfig['BaiduAccessTokenExpire'] = 86400; // 百度AccessToken过期时间,单位秒
 
 wfLoadExtension('ForcePreview');
 
@@ -352,6 +365,9 @@ wfLoadExtension('ReplaceText');
 //$wgScoreLame = '/usr/local/bin/lame'; // if you want MIDI to mp3 conversion
 //$wgScoreTrim = false; //true Set to false if you don't want score trimming
 
+wfLoadExtension('Scribunto');
+$wgScribuntoDefaultEngine = 'luasandbox';
+
 require_once "$IP/extensions/SocialProfile/SocialProfile.php";
 //Avatar
 $wgAvatarPath = 'https://avatar.thbwiki.cc/';
@@ -389,6 +405,7 @@ $wgBlacklistSettings = [
 		],
 	],
 ];
+// $wgLogSpamBlacklistHits = true;
 
 wfLoadExtension('TabberNeue');
 
@@ -405,13 +422,13 @@ wfLoadExtension('TemplateStyles');
 
 $wgTemplateStylesAllowedUrls = [
 	"audio" => [
-		"<^https://upload\\.thwiki\\.cc/>"
+		"<^https://upload\\.thbwiki\\.cc/>"
 	],
 	"image" => [
-		"<^https://upload\\.thwiki\\.cc/>"
+		"<^https://upload\\.thbwiki\\.cc/>"
 	],
 	"svg" => [
-		"<^https://upload\\.thwiki\\.cc/[^?#]*\\.svg(?:[?#]|$)>"
+		"<^https://upload\\.thbwiki\\.cc/[^?#]*\\.svg(?:[?#]|$)>"
 	],
 	"font" => [],
 	"namespace" => [
@@ -431,6 +448,8 @@ wfLoadExtension('TextTransform');
 wfLoadExtension('UrlGetParameters');
 
 wfLoadExtension('Variables');
+
+wfLoadExtension('VariablesLua');
 
 wfLoadExtension('Widgets');
 

@@ -50,14 +50,14 @@ $wgAllowExternalImages = true;
 $wgAllowCopyUploads = true;
 $wgCopyUploadsFromSpecialUpload = true;
 $wgAllowImageTag = false; //Allow <img> tag to be used in wikitext
-$wgFileExtensions = ['png', 'gif', 'jpg', 'jpeg', 'pdf', 'mid', 'midi', 'mp3', 'svg', 'webp', 'apng']; // 'ico'存在跨站攻击风险
+$wgFileExtensions = ['png', 'jpg', 'jpeg', 'pdf', 'mid', 'midi', 'mp3', 'svg', 'webp', 'apng']; // 'ico'存在跨站攻击风险
 $wgAllowTitlesInSVG = false;
 #将图片与wiki源程序分开，并使用不同的域名
 $wgUploadDirectory = "${IP}_upload"; //图片被上传到的绝对路径
 $wgImageMagickTempDir = "${wgUploadDirectory}/imtemp";
 $wgUploadPath = "https://upload.thbwiki.cc"; //图片相对URL路径
 # InstantCommons allows wiki to use images from http://commons.wikimedia.org
-$wgUseInstantCommons = true;
+$wgUseInstantCommons = false;
 $wgCommonsMetadataForceRecalculate = true;
 $wgNativeImageLazyLoading = true;
 
@@ -84,3 +84,16 @@ $wgFooterIcons['poweredby']['myicon'] = [
 
 $wgShowExceptionDetails = false;
 $wgAjaxEditStash = false;
+
+$wgHooks['BeforePageDisplay'][] = function ( $out, $skin ) {
+    $title = $out->getTitle();
+    if ( $title && !$title->isSpecialPage() ) {
+        $out->addHeadItem( 'mw-canonical',
+            "\t" . \Html::element( 'link', [
+                'rel' => 'canonical',
+                'href' => $title->getFullURL(),   // 自动随页面/语言变体变化
+            ] ) . "\n"
+        );
+    }
+    return true;
+};

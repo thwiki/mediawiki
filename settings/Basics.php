@@ -20,3 +20,5 @@ $wgRestPath = "$wgScriptPath/rest";
 ## The relative URL path to the skins directory
 $wgStylePath = "$wgScriptPath/skins";
 $wgArticlePath = "/$1";
+$wgUsePathInfo = true;
+$wgCanonicalRedirect = true;

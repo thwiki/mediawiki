@@ -7,8 +7,8 @@ if (!defined('MEDIAWIKI')) {
 }
 
 // set to 0 to stop jobs running
-$wgJobRunRate = 1;
-$wgRunJobsAsync = true;
+$wgJobRunRate = 0;
+$wgRunJobsAsync = false;
 
 $wgJobTypeConf = [
 	'default' => ['class' => 'JobQueueDB', 'order' => 'random', 'claimTTL' => 600, 'maxTries' => 10],

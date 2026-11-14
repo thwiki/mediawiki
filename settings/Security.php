@@ -31,4 +31,4 @@ $wgWhitelistRead = [];
 $wgWhitelistReadRegexp = [];
 
 # 跨站AJAX域名白名单
-$wgCrossSiteAJAXdomains = ['test.thwiki.cc', 'tool.thwiki.cc', 'touhou.cd', 'cd.thwiki.cc', 'cdtest.thwiki.cc'];
+$wgCrossSiteAJAXdomains = ['test.thwiki.cc', 'tool.thwiki.cc', 'touhou.cd', 'cd.thwiki.cc', 'cdtest.thwiki.cc', 'cd.lilywhite.cc', 'book.lilywhite.cc'];

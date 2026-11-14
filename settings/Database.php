@@ -14,7 +14,7 @@ $wgDBservers = [
 		'user' => $wgDBuser,
 		'password' => $wgDBpassword,
 		'type' => $wgDBtype,
-		'flags' => DBO_DEFAULT | DBO_PERSISTENT, // | DBO_COMPRESS,
+		'flags' => DBO_DEFAULT, // | DBO_COMPRESS,
 		'load' => 0,
 	],
 ];

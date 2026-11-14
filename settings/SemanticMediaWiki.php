@@ -28,7 +28,7 @@ $smwgEnabledEditPageHelp = false;
 $smwgQMaxSize = 16;
 $smwgQMaxLimit = 20000; // Max Rows
 $smwgQDefaultLimit = 50; // Default Number of Rows
-$smwgQMaxInlineLimit = 5000; // Max Inline Rows
+$smwgQMaxInlineLimit = 10000; // Max Inline Rows
 $smwgQUpperbound = 20000; // Max Offset
 $smwgQPrintoutLimit = 100; // Max Printouts
 $smwgBrowseFeatures = $smwgBrowseFeatures | SMW_BROWSE_SHOW_INVERSE;
@@ -59,4 +59,8 @@ $smwgNamespacesWithSemanticLinks = [
 	NS_GDIALOGUE_TALK => false,
 	NS_LYRICS => true,
 	NS_LYRICS_TALK => false,
+	NS_MODULE => false,
+	NS_MODULE_TALK => false,
 ];
+
+wfLoadExtension( 'SemanticScribunto' );
