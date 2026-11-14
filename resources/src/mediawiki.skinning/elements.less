@@ -55,8 +55,11 @@ hr {
 }
 
 /* Structural Elements */
+/* [THBWiki 1.46] 1.46 给页面标题 h1 也加了 flow-root，形成 BFC 后被右侧浮动的
+ * .mw-indicators 挤窄（1200px -> 1137px），标题下横线不到头；同时站点 CSS 依赖
+ * `#firstHeading{display:none}` 隐藏首页/用户页标题，ID 规则若再由皮肤覆盖会失效。
+ * 1.39 的 h1 是普通 block，这里只对（被包裹的）h2-h6 保留 flow-root。 */
 .mw-heading,
-h1,
 h2,
 h3,
 h4,

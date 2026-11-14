@@ -4,12 +4,21 @@ function buildIndex() {
 	const $items = $( '.mw-specialpages-list li' );
 	$items.each( function () {
 		const $item = $( this );
-		const $group = $item.closest( '.mw-specialpages-list' ).prev( '.mw-specialpagesgroup' );
+		// [THBWiki 1.46] 组内子组的 list 前一个是 h3.mw-specialpagessubgroup，
+		// prev() 会得到空集合 -> $label[0] 未定义抛 TypeError，后续全都搜不到。
+		const $list = $item.closest( '.mw-specialpages-list' );
+		let $group = $list.prev( '.mw-specialpagesgroup' );
+		if ( !$group.length ) {
+			$group = $list.prevAll( '.mw-specialpagesgroup' ).first();
+		}
 		const $toc = $( '#toc .toclevel-1, #mw-panel-toc-list > li:not(:first-child)' ).filter( ( i, el ) => (
 			el.textContent.trim().replace( /^\d+/, '' ).replace( /\s+/, ' ' ).trim() === $group.text()
 		) );
 
 		function addToIndex( $label ) {
+			if ( !$label || !$label.length ) {
+				return;
+			}
 			const text = $label.val() || $label[ 0 ].textContent.toLowerCase().trim().replace( /\s+/, ' ' );
 			if ( text ) {
 				index[ text ] = index[ text ] || [];
