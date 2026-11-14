@@ -177,9 +177,14 @@ class SpecialUpload extends SpecialPage {
 		$this->mForReUpload = $request->getBool( 'wpForReUpload' ); // updating a file
 
 		$commentDefault = '';
-		$commentMsg = $this->msg( 'upload-default-description' )->inContentLanguage();
+		// [THBWiki F-28] 站点用 MediaWiki:Upload-default-description 里的
+		// {{#if:{{#pos:$1|...}}}} 决定是否预置 {{封面图片}} / QQ 群分类。
+		// 1.39 会传入目标文件名并 parse；1.46 起改成 plain() 且不传参数，
+		// 结果摘要框里只剩未展开的 $1 与解析函数。这里恢复 1.39 的行为。
+		$commentMsg = $this->msg( 'upload-default-description', [ $this->mDesiredDestName ] )
+			->inContentLanguage();
 		if ( !$this->mForReUpload && !$commentMsg->isDisabled() ) {
-			$commentDefault = $commentMsg->plain();
+			$commentDefault = $commentMsg->parse();
 		}
 		$this->mComment = $request->getText( 'wpUploadDescription', $commentDefault );
 
