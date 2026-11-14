@@ -1239,7 +1239,8 @@ abstract class LanguageConverter implements ILanguageConverter {
 			return $text;
 		}
 
-		return "-{R|$text}-";
+		// [THBWiki F-31] 1.39 定制：不包 -{R|..}-，避免转换标记泄漏到页面/接口。
+		return $text;
 	}
 
 	/** @inheritDoc */
