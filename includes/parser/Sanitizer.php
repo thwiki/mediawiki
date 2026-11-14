@@ -570,8 +570,9 @@ class Sanitizer {
 			# * Disallow data attributes used by MediaWiki code
 			# * Ensure that the attribute is not namespaced by banning
 			#   colons.
+			# fix 20250805: '/^data-[^:]*$/i' maybe allows data-/onclick
 			if ( (
-				!preg_match( '/^data-[^:]*$/i', $attribute ) &&
+				!preg_match( '/^data-[a-z0-9][a-z0-9_\-]*$/i', $attribute ) &&
 				!array_key_exists( $attribute, $allowed )
 			) || self::isReservedDataAttribute( $attribute ) ) {
 				continue;
