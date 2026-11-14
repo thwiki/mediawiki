@@ -56,8 +56,9 @@ mw.hook( 'wikipage.content' ).add( ( $content ) => {
 	checkboxShift( $content.find( 'input[type="checkbox"]:not(.noshiftselect)' ) );
 } );
 
-// Add toolbox portlet to toggle all collapsibles if there are any
-require( './toggleAllCollapsibles.js' );
+// [1.46 迁移] 1.46 新增「全部展开/全部折叠」工具箱按钮（toggleAllCollapsibles）。
+// THBWiki 生产 1.39 没有该按钮；为保持行为一致，这里不加载（文件保留以便将来启用）。
+// require( './toggleAllCollapsibles.js' );
 
 // Handle elements outside the wikipage content
 $( () => {

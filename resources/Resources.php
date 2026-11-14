@@ -1772,7 +1772,7 @@ return [
 			'checkboxHack.js',
 			'clearAddressBar.js',
 			'teleportTarget.js',
-			'toggleAllCollapsibles.js',
+			// [1.46 迁移] 生产 1.39 无「全部展开/全部折叠」按钮，移除该 packageFile。
 			[ 'name' => 'config.json', 'callback' => static function (
 				Context $context,
 				Config $config
