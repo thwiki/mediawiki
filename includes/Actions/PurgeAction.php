@@ -53,7 +53,8 @@ class PurgeAction extends FormAction {
 		// This will throw exceptions if there's a problem
 		$this->checkCanExecute( $this->getUser() );
 
-		if ( $this->getRequest()->wasPosted() ) {
+		// [THBWiki F-30] 1.39 允许有 freepurge 权限的用户用 GET 刷新（工具/链接直接打开）。
+		if ( $this->getRequest()->wasPosted() || $this->getUser()->isAllowed( 'freepurge' ) ) {
 			$this->redirectParams = wfArrayToCgi( array_diff_key(
 				$this->getRequest()->getQueryValues(),
 				[ 'title' => null, 'action' => null ]
