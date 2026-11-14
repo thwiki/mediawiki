@@ -17,6 +17,7 @@ use MediaWiki\Page\LinkBatchFactory;
 use MediaWiki\Search\SearchEngine;
 use MediaWiki\Search\SearchEngineConfig;
 use MediaWiki\Search\SearchEngineFactory;
+use MediaWiki\Search\SearchMySQL;
 use MediaWiki\Title\Title;
 use MediaWiki\Utils\UrlUtils;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -26,6 +27,9 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class ApiOpenSearch extends ApiBase {
 	use SearchApi;
+
+	/** @var bool 是否把重定向显示成「来源 → 目标」 */
+	private bool $displayRedirects = false;
 
 	public function __construct(
 		ApiMain $mainModule,
@@ -104,6 +108,9 @@ class ApiOpenSearch extends ApiBase {
 	 *  Note that phan annotations don't support keys containing a space.
 	 */
 	private function search( $search, array $params ) {
+		// THBWiki: 1.39 的 opensearch 固定走 SearchMySQL（配合 CollisionManager 的
+		// PrefixSearchBackend 钩子做包含匹配/重定向/日文汉字归一化），1.46 删掉了这行。
+		$params['backend'] = SearchMySQL::class;
 		$searchEngine = $this->buildSearchEngine( $params );
 		$titles = $searchEngine->extractTitles( $searchEngine->completionSearchWithVariants( $search ) );
 		$results = [];
@@ -121,7 +128,9 @@ class ApiOpenSearch extends ApiBase {
 			// Backwards compatibility, don't resolve for JSON.
 			$resolveRedir = $this->getBaseFormat() !== 'json';
 		} else {
-			$resolveRedir = $params['redirects'] === 'resolve';
+			// THBWiki: 恢复 1.39 的 redirects=display（搜索建议里显示「来源 → 目标」）
+			$this->displayRedirects = $params['redirects'] === 'display';
+			$resolveRedir = $params['redirects'] === 'resolve' || $this->displayRedirects;
 		}
 
 		if ( $resolveRedir ) {
@@ -210,8 +219,17 @@ class ApiOpenSearch extends ApiBase {
 				$terms = [];
 				$descriptions = [];
 				$urls = [];
+				$arrow = ' ' . $this->getLanguage()->getArrow() . ' ';
 				foreach ( $results as $r ) {
-					$terms[] = $r['title']->getPrefixedText();
+					if ( $this->displayRedirects ) {
+						if ( $r['redirect from'] instanceof Title ) {
+							$terms[] = $r['redirect from']->getPrefixedText() . $arrow . $r['title']->getPrefixedText();
+						} else {
+							$terms[] = $r['title']->getPrefixedText();
+						}
+					} else {
+						$terms[] = $r['title']->getPrefixedText();
+					}
 					$descriptions[] = strval( $r['extract'] );
 					$urls[] = $r['url'];
 				}
@@ -266,7 +284,7 @@ class ApiOpenSearch extends ApiBase {
 				ParamValidator::PARAM_DEPRECATED => true,
 			],
 			'redirects' => [
-				ParamValidator::PARAM_TYPE => [ 'return', 'resolve' ],
+				ParamValidator::PARAM_TYPE => [ 'return', 'resolve', 'display' ],
 				ApiBase::PARAM_HELP_MSG_PER_VALUE => [],
 				ApiBase::PARAM_HELP_MSG_APPEND => [ 'apihelp-opensearch-param-redirects-append' ],
 			],

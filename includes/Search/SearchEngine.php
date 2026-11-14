@@ -534,7 +534,22 @@ abstract class SearchEngine {
 	 * @return SearchSuggestionSet
 	 */
 	protected function completionSearchBackend( $search ) {
+		$results = [];
+
 		$search = trim( $search );
+
+		// THBWiki: 1.39 在这里跑 PrefixSearchBackend 钩子（CollisionManager 用它做包含匹配、
+		// 重定向与日文汉字归一化）；1.46 删掉了钩子，导致搜索建议只剩前缀匹配。
+		if ( !in_array( NS_SPECIAL, $this->namespaces ) &&
+			!$this->getHookContainer()->run(
+				'PrefixSearchBackend',
+				[ $this->namespaces, $search, $this->limit, &$results, $this->offset ]
+			)
+		) {
+			// False means hook worked.
+			return SearchSuggestionSet::fromTitles( $results );
+		}
+
 		$results = $this->simplePrefixSearch( $search );
 		return SearchSuggestionSet::fromTitles( $results );
 	}
