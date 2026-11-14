@@ -17,6 +17,7 @@ use MediaWiki\HTMLForm\HTMLForm;
 use MediaWiki\Linker\Linker;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MainConfigNames;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\LinkBatchFactory;
 use MediaWiki\Pager\IndexPager;
 use MediaWiki\Pager\TablePager;
@@ -603,6 +604,16 @@ class ImageListPager extends TablePager {
 				$file = $this->localRepo->findFile( $fileName, $opt );
 				// If statement for paranoia
 				if ( $file ) {
+					// [THBWiki F-14] 1.46 删除了 BeforeAddToImageList（MediaContentRating
+					// 依赖它把未授权的 R18 图片从 Special:NewFiles 列表里去掉）。
+					$html = '';
+					$proceed = MediaWikiServices::getInstance()->getHookContainer()->run(
+						'BeforeAddToImageList',
+						[ $this, $file, &$html ]
+					);
+					if ( !$proceed ) {
+						return $html;
+					}
 					$thumb = $file->transform( [ 'width' => 180, 'height' => 360 ] );
 					if ( $thumb ) {
 						return $thumb->toHtml( [ 'desc-link' => true, 'loading' => 'lazy' ] );

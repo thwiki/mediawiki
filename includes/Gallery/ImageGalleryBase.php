@@ -277,6 +277,40 @@ abstract class ImageGalleryBase extends ContextSource {
 	}
 
 	/**
+	 * [THBWiki F-15] 1.46 把 BeforeParserFetchFileAndTitle 的 $nt 改为传值，
+	 * CustomRedirect 无法再把「文件:foo.png」映射到实际存在的「文件:foo.jpg」，
+	 * 结果 <gallery> 里写错扩展名的图会变成 mw-broken-media。
+	 * 这里在入列前用 CustomRedirectLookup 解析一次目标标题作为兜底。
+	 *
+	 * @param Title $title
+	 * @return Title
+	 */
+	private static function resolveRedirectTitle( $title ) {
+		if ( !$title->inNamespace( NS_FILE ) || $title->isExternal() ) {
+			return $title;
+		}
+		if ( $title->exists() ) {
+			return $title;
+		}
+		$services = MediaWikiServices::getInstance();
+		if ( !$services->hasService( 'CustomRedirectLookup' ) ) {
+			return $title;
+		}
+		try {
+			$target = $services->getService( 'CustomRedirectLookup' )->getRedirectTarget( $title );
+			if ( $target !== null && !$target->isSameLinkAs( $title ) ) {
+				$targetTitle = Title::newFromLinkTarget( $target );
+				if ( $targetTitle && $targetTitle->exists() ) {
+					return $targetTitle;
+				}
+			}
+		} catch ( \Throwable $e ) {
+			// 解析失败时保持原样，不影响正常渲染
+		}
+		return $title;
+	}
+
+	/**
 	 * Add an image to the gallery.
 	 *
 	 * @param Title $title Title object of the image that is added to the gallery
@@ -301,8 +335,17 @@ abstract class ImageGalleryBase extends ContextSource {
 			// Old calling convention
 			$title = $title->getTitle();
 		}
-		$this->mImages[] = [ $title, $html, $alt, $link, $handlerOpts, $loading, $imageOptions ];
-		wfDebug( 'ImageGallery::add ' . $title->getText() );
+		$title = self::resolveRedirectTitle( $title );
+		// [THBWiki F-14] 1.46 删除了 BeforeAddToGallery（MediaContentRating 依赖它
+		// 让未授权用户看不到 R18 图片），这里按 1.39 恢复调用点与中止语义。
+		$proceed = MediaWikiServices::getInstance()->getHookContainer()->run(
+			'BeforeAddToGallery',
+			[ &$title, &$html, &$alt, &$link, &$handlerOpts ]
+		);
+		if ( $proceed ) {
+			$this->mImages[] = [ $title, $html, $alt, $link, $handlerOpts, $loading, $imageOptions ];
+			wfDebug( 'ImageGallery::add ' . $title->getText() );
+		}
 	}
 
 	/**
@@ -330,7 +373,15 @@ abstract class ImageGalleryBase extends ContextSource {
 			// Old calling convention
 			$title = $title->getTitle();
 		}
-		array_unshift( $this->mImages, [ $title, $html, $alt, $link, $handlerOpts, $loading, $imageOptions ] );
+		$title = self::resolveRedirectTitle( $title );
+		// [THBWiki F-14] 同 add()，恢复 1.39 的 BeforeAddToGallery 调用点与中止语义
+		$proceed = MediaWikiServices::getInstance()->getHookContainer()->run(
+			'BeforeAddToGallery',
+			[ &$title, &$html, &$alt, &$link, &$handlerOpts ]
+		);
+		if ( $proceed ) {
+			array_unshift( $this->mImages, [ $title, $html, $alt, $link, $handlerOpts, $loading, $imageOptions ] );
+		}
 	}
 
 	/**
