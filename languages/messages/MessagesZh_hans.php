@@ -113,6 +113,8 @@ $namespaceNames = [
 	NS_USER_WIKI_TALK    => '用户Wiki讨论',
 	NS_USER_PROFILE      => '用户资料',
 	NS_USER_PROFILE_TALK => '用户资料讨论',
+	NS_MODULE 			 => '模块',
+	NS_MODULE_TALK 		 => '模块讨论',
 ];
 
 $namespaceAliases = [
@@ -187,6 +189,9 @@ $namespaceAliases = [
 	'Widget'	=> NS_WIDGET,
 	'Widget對話' => NS_WIDGET_TALK,
 	'Widget討論' => NS_WIDGET_TALK,
+	'模塊' => NS_MODULE,
+	'模塊討論' => NS_MODULE_TALK,
+	'模塊對話' => NS_MODULE_TALK,
 
 	'Omake' => NS_OMAKE,
 	'Omake_talk' => NS_OMAKE_TALK,
