@@ -424,7 +424,8 @@ class Parser {
 		}
 		$svcOptions->assertRequiredOptions( self::CONSTRUCTOR_OPTIONS );
 
-		$this->mExtLinkBracketedRegex = '/\[(((?i)' . $this->urlUtils->validProtocols() . ')' .
+		// [THBWiki 1.46 修复] 恢复 1.39 对根相对外链（[/path 文字]）的解析
+		$this->mExtLinkBracketedRegex = '/\[(((?i)' . $this->urlUtils->validProtocols() . '|\\/)' .
 			self::EXT_LINK_ADDR .
 			self::EXT_LINK_URL_CLASS . '*)\p{Zs}*([^\]\\x00-\\x08\\x0a-\\x1F\\x{FFFD}]*)\]/Su';
 
@@ -1850,7 +1851,7 @@ class Parser {
 			# Not an image, make a link
 			$text = $this->getLinkRenderer()->makeExternalLink(
 				$url,
-				$this->getTargetLanguageConverter()->markNoConversion( $url ),
+				$this->mOptions->getInterfaceMessage() ? $url : $this->getTargetLanguageConverter()->markNoConversion( $url ),
 				$this->getTitle(),
 				'free',
 				$this->getExternalLinkAttribs( $url )
@@ -2098,7 +2099,7 @@ class Parser {
 		$i = 0;
 		while ( $i < count( $bits ) ) {
 			$url = $bits[$i++];
-			$i++; // protocol
+			$protocol = $bits[$i++];
 			$text = $bits[$i++];
 			$trail = $bits[$i++];
 
@@ -2136,7 +2137,9 @@ class Parser {
 			}
 
 			// Excluding protocol-relative URLs may avoid many false positives.
-			if ( preg_match( '/^(?:' . $this->urlUtils->validAbsoluteProtocols() . ')/', $text ) ) {
+			if ( preg_match( '/^(?:' . $this->urlUtils->validAbsoluteProtocols() . ')/', $text )
+				&& !$this->mOptions->getInterfaceMessage()
+			) {
 				$text = $this->getTargetLanguageConverter()->markNoConversion( $text );
 			}
 
@@ -2146,13 +2149,20 @@ class Parser {
 			# This means that users can paste URLs directly into the text
 			# Funny characters like ö aren't valid in URLs anyway
 			# This was changed in August 2004
-			$s .= $this->getLinkRenderer()->makeExternalLink(
-				$url,
-				new HtmlArmor( $text ),
-				$this->getTitle(),
-				$linktype,
-				$this->getExternalLinkAttribs( $url )
-			) . $dtrail . $trail;
+			if ( $protocol === '/' ) {
+				// THBWiki 1.46 兼容：恢复 1.39 的根相对链接特判，
+				// 渲染为内部链接（不带 class=external，避免外链图标）。
+				$s .= Html::rawElement( 'a', [ 'href' => $url ], $text );
+			} else {
+				$s .= $this->getLinkRenderer()->makeExternalLink(
+					$url,
+					new HtmlArmor( $text ),
+					$this->getTitle(),
+					$linktype,
+					$this->getExternalLinkAttribs( $url )
+				);
+			}
+			$s .= $dtrail . $trail;
 
 			# Register link in the output object.
 			$this->mOutput->addExternalLink( $url );
