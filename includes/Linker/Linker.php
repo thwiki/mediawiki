@@ -346,7 +346,11 @@ class Linker {
 			$classes[] = 'mw-default-size';
 		}
 
-		$prefix = $postfix = '';
+		// [THBWiki F-16] 1.46 不再读取 frameParams['prefix']/['postfix']，
+		// 导致 MediaContentRating 之类的扩展无法在图片 HTML 前后加标记
+		// （未授权用户看不到 R18 图片依赖这个标记被后置钩子整段删除）。
+		$prefix = $frameParams['prefix'] ?? '';
+		$postfix = $frameParams['postfix'] ?? '';
 
 		if ( $file && !isset( $handlerParams['width'] ) ) {
 			if ( isset( $handlerParams['height'] ) && $file->isVectorized() ) {
@@ -500,7 +504,7 @@ class Linker {
 
 		$s = Html::rawElement( $wrapper, $attribs, $s . $caption );
 
-		return str_replace( "\n", ' ', $s );
+		return str_replace( "\n", ' ', $prefix . $s . $postfix );
 	}
 
 	/**
