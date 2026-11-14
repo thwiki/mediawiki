@@ -1,0 +1,452 @@
+<?php
+
+# Protect against web entry
+
+if (!defined('MEDIAWIKI')) {
+	exit;
+}
+
+# Enabled extensions. Most of the extensions are enabled by adding
+# wfLoadExtensions('ExtensionName');
+# to LocalSettings.php. Check specific extension documentation for more details.
+
+wfLoadExtension('AbuseFilter');
+
+wfLoadExtension('Cite');
+
+wfLoadExtension('CiteThisPage');
+
+wfLoadExtension( 'CodeEditor' );
+$wgDefaultUserOptions['usebetatoolbar'] = 1;
+
+wfLoadExtensions(['ConfirmEdit', 'ConfirmEdit/QuestyCaptcha']);
+$wgCaptchaClass = 'QuestyCaptcha';
+require_once "$IP/settings/secrets/QuestyCaptcha.php";
+$wgCaptchaTriggers['edit'] = false;
+$wgCaptchaTriggers['create'] = true;
+$wgCaptchaTriggers['addurl'] = true;
+$wgCaptchaTriggers['createaccount'] = true;
+$wgCaptchaTriggers['badlogin'] = true;
+
+wfLoadExtension('Gadgets');
+wfLoadExtension('ImageMap');
+wfLoadExtension('InputBox');
+
+// [1.46 迁移] Interwiki 已并入核心，不再需要加载扩展
+// wfLoadExtension('Interwiki');
+$wgEnableInterwikiTranscluding = true;
+$wgEnableInterwikiTemplatesTracking = true;
+$wgInterwikiViewOnly = false;
+
+wfLoadExtension('Nuke');
+
+wfLoadExtension('ParserFunctions');
+$wgPFEnableStringFunctions = true; // 字符串函数
+
+wfLoadExtension('PdfHandler');
+$wgPdfProcessor = 'gs';
+$wgPdfPostProcessor = $wgImageMagickConvertCommand;
+$wgPdfInfo = 'pdfinfo';
+
+wfLoadExtension('Poem');
+
+//wfLoadExtension( 'SpamBlacklist' );
+wfLoadExtension('SyntaxHighlight_GeSHi');
+
+wfLoadExtension('TitleBlacklist');
+$wgTitleBlacklistSources = [
+	[
+		'type' => 'localpage',
+		'src' => 'MediaWiki:Titleblacklist',
+	],
+];
+
+wfLoadExtension('WikiEditor');
+$wgDefaultUserOptions['usebetatoolbar'] = 1;
+$wgDefaultUserOptions['usebetatoolbar-cgd'] = 1;
+$wgDefaultUserOptions['wikieditor-preview'] = 1;
+
+wfLoadExtension('VipsScaler');
+$wgVipsOptions = [
+	// Sharpen jpeg files which are shrunk more than 1.5
+	[
+		'conditions' => [
+			'mimeType' => 'image/jpeg',
+			'minShrinkFactor' => 1.5,
+		],
+		'sharpen' => ['radius' => 0, 'sigma' => 0.4],
+		'bilinear' => false,
+		'optimize' => '[Q=70,optimize_coding,strip=true]',
+	],
+	// Other jpeg files
+	[
+		'conditions' => [
+			'mimeType' => 'image/jpeg',
+		],
+		'sharpen' => false,
+		'bilinear' => false,
+		'optimize' => '[Q=70,optimize_coding,strip=true]',
+	],
+	// Do a simple shrink for PNGs
+	[
+		'conditions' => [
+			'mimeType' => 'image/png',
+		],
+		'sharpen' => false,
+		'bilinear' => false,
+		'optimize' => '[compression=9,effort=10,strip=true]',
+	],
+	[
+		'conditions' => [
+			'mimeType' => 'image/webp',
+		],
+		'sharpen' => false,
+		'bilinear' => false,
+	],
+];
+
+wfLoadExtension('CustomRedirect');
+$wgCustomRedirectUseShortUrl = true;
+$wgCustomRedirectShowShortUrl = true;
+$wgCustomRedirectEnabledNamespaces = [0, 4, 6, 8, 10, 12, 506, 508, 512];
+$wgCustomRedirectRegexEnabledNamespaces = [0];
+
+require_once "$IP/extensions/Achievements/Achievements.php";
+
+wfLoadExtension('AnalyzePage');
+
+wfLoadExtension('Arrays');
+
+wfLoadExtension('AskBook');
+wfLoadExtension('AskTrack');
+wfLoadExtension('AskMCP');
+$wgAskMCPTrackApi = "$wgServer/rest/asktrack/v0";
+$wgAskMCPBookApi  = "$wgServer/rest/askbook/v0";
+$wgAskMCPHttpTimeout = 20;
+
+wfLoadExtension('CategorySortHeaders');
+
+wfLoadExtension('CategoryTree');
+$wgUseAjax = true;
+$wgEnableMWSuggest = true;
+$wgCategoryTreeCategoryPageOptions['mode'] = 'all';
+$wgCategoryTreeDefaultOptions['namespaces'] = false;
+
+wfLoadExtension('CharInsert');
+
+wfLoadExtension('CheckUser');
+
+wfLoadExtension('Cloudflare');
+$wgCloudflarePurgePage = false;
+$wgCloudflarePurgeFile = true;
+
+wfLoadExtension('ChineseNumerals');
+
+wfLoadExtension('CollisionManager');
+$wgCollisionManagerDisambigIcon = 'https://static.thbwiki.cc/template/disambig.svg';
+$wgCollisionManagerRulePriorities = [
+	'官方游戏' => 1,
+	'官方书籍' => 2,
+	'官方专辑' => 3,
+	'旧作游戏' => 4,
+	'官方角色' => 5,
+	'旧作角色' => 6,
+	'西方' => 7,
+	'曲目' => 7,
+	'符卡' => 8,
+	'场景' => 9,
+	'物品' => 9,
+	'列表外词条' => 10,
+	'相关作品' => 11,
+	'商业游戏' => 12,
+	'活动' => 13,
+	'同人角色' => 14,
+	'公司会社' => 15,
+	'同人社团' => 16,
+	'人物' => 17,
+	'同人软件' => 19,
+	'同人游戏' => 20,
+	'同人专辑' => 20,
+	'同人志' => 20,
+	'同人视频' => 20,
+	'模型周边' => 20,
+	'周边' => 20,
+	'其他同人作品' => 20,
+	'' => 25,
+	'/^20\\d\\d$/' => 30,
+];
+
+wfLoadExtension('ContributionScores');
+$wgContribScoreIgnoreBots = false; // Exclude Bots from the reporting - Can be omitted.
+$wgContribScoreIgnoreBlockedUsers = true; // Exclude Blocked Users from the reporting - Can be omitted.
+$wgContribScoresUseRealName = true; // Use real user names when available - Can be omitted. Only for MediaWiki 1.19 and later.
+$wgContribScoreDisableCache = false; // Set to true to disable cache for parser function and inclusion of table.
+// Each array defines a report - 7,50 is "past 7 days" and "LIMIT 50" - Can be omitted.
+$wgContribScoreReports = [[7, 15], [30, 25], [0, 50]];
+
+wfLoadExtension('Disambiguator');
+
+wfLoadExtension('DurationExtension');
+
+wfLoadExtension('Echo');
+$wgEchoShowFullNotificationsLink = true;
+$wgEchoUseJobQueue = true;
+$wgEchoEmailFooterAddress = 'TBSGroup';
+$wgDefaultUserOptions['echo-email-frequency'] = 1;
+
+wfLoadExtension('Editcount');
+
+wfLoadExtension('Elastica');
+wfLoadExtension('CirrusSearch');
+// [1.46 迁移] 改用本机 OpenSearch 2.19.5（127.0.0.1:9201）。
+// 1.39 的 $wgCirrusSearchServers + ES6CompatTransportWrapper 在 1.46 已不适用。
+$wgCirrusSearchClusters = [
+	'default' => [ [ 'host' => '127.0.0.1', 'port' => 9201, 'transport' => 'Http' ] ],
+];
+$wgDisableSearchUpdate = false;
+/*$wgDebugLogGroups['CirrusSearch'] = [
+'destination' => "$IP/error_log",
+'level' => 'warning',
+];*/
+$wgSearchType = 'CirrusSearch';
+// 1.46: SearchMySQL 已命名空间化，必须是 FQCN 才能被 SearchEngineFactory 识别
+$wgSearchTypeAlternatives = [ \MediaWiki\Search\SearchMySQL::class ];
+$wgCirrusSearchClientSideUpdateTimeout = 60;
+$wgCirrusSearchMoreLikeThisTTL = 86400 * 7; // Cache more like results for 7 days
+
+wfLoadExtension('ExtraMagicWords');
+
+require_once "$IP/extensions/FixedHeader/FixedHeader.php";
+
+wfLoadExtension('Flow');
+$wgFlowContentFormat = 'html';
+
+wfLoadExtension('FlowThread');
+$wgFlowThreadConfig['AnonymousAvatar'] = 'https://avatar.thbwiki.cc/default_ml.jpg';
+$wgFlowThreadConfig['Avatar'] = 'https://avatar.thbwiki.cc/thwikicc_wiki_${userid}_ml.jpg';
+$wgFlowThreadConfig['MaxNestLevel'] = 3;
+$wgFlowThreadConfig['PopularPostCount'] = 3;
+$wgFlowThreadConfig['PopularPostThreshold'] = 3;
+require_once "$IP/settings/secrets/Baidu.php";
+$wgFlowThreadConfig['BaiduCheckLevel'] = 0; // 百度审核等级 0：不启用审核 1：仅合规 2：允许疑似不合规
+$wgFlowThreadConfig['BaiduErrorDefault'] = false; // 当百度审核失败时默认是否为SPAM true：SPAM false：正常结果
+$wgFlowThreadConfig['BaiduAccessTokenExpire'] = 86400; // 百度AccessToken过期时间,单位秒
+
+wfLoadExtension('ForcePreview');
+
+require_once "$IP/extensions/FormEdit/FormEdit.php";
+
+require_once "$IP/extensions/HtmlMedia/HtmlMedia.php";
+
+wfLoadExtension('LabeledSectionTransclusion');
+
+wfLoadExtension('LanguageSelector');
+$wgLanguageSelectorShowAll = false;
+$wgLanguageSelectorDetectLanguage = 0; // LANGUAGE_SELECTOR_USE_CONTENT_LANG;
+$wgLanguageSelectorLocation = 3; // LANGUAGE_SELECTOR_AS_PORTLET;
+// [1.46 迁移] 语言选择器保留 中文 / 日本語 / English / Italiano（与生产一致）
+$wgLanguageSelectorLanguages = [ 'zh', 'ja', 'en', 'it' ];
+
+wfLoadExtension('Lockdown');
+$wgActionLockdown['history'] = ['user'];
+$wgSpecialPageLockdown['Recentchanges'] = ['user'];
+$wgSpecialPageLockdown['Whatlinkshere'] = ['user'];
+$wgSpecialPageLockdown['Log'] = ['user'];
+$wgSpecialPageLockdown['Categories'] = ['user'];
+$wgSpecialPageLockdown['Contributions'] = ['user'];
+$wgSpecialPageLockdown['Recentchangeslinked'] = ['user'];
+$wgSpecialPageLockdown['Browse'] = ['user'];
+$wgSpecialPageLockdown['Listusers'] = ['user'];
+$wgSpecialPageLockdown['PageProperty'] = ['user'];
+$wgSpecialPageLockdown['SearchByProperty'] = ['user'];
+$wgSpecialPageLockdown['Export'] = ['user'];
+$wgSpecialPageLockdown['PagesWithSameName'] = ['user'];
+$wgSpecialPageLockdown['PageHistory'] = ['user'];
+$wgSpecialPageLockdown['Protectedpages'] = ['textop', 'sysop'];
+$wgSpecialPageLockdown['Protectedtitles'] = ['textop', 'sysop'];
+$wgSpecialPageLockdown['BlockList'] = ['textop', 'sysop'];
+$wgSpecialPageLockdown['AutoblockList'] = ['textop', 'sysop'];
+$wgSpecialPageLockdown['AbuseLog'] = ['textop', 'sysop'];
+$wgSpecialPageLockdown['AbuseFilter'] = ['textop', 'sysop'];
+
+wfLoadExtension('SimpleMathJax');
+
+wfLoadExtension('MaintenanceApi');
+
+wfLoadExtension('MediaContentRating');
+$wgMediaContentRatingWarningImage = '限制图片.jpg';
+
+// [1.46 迁移] MenuSidebar 输出 HTML 字符串，由皮肤按 html-items 处理（已跳过 TOOLBOX 等魔法 section）
+wfLoadExtension('MenuSidebar');
+
+require_once "$IP/extensions/MultiArrayMap/MultiArrayMap.php";
+
+wfLoadExtension('MultiBoilerplate');
+$wgMultiBoilerplateOverwrite = false;
+$wgMultiBoilerplateDiplaySpecialPage = true;
+$wgMultiBoilerplateOptions["同人社团"] = "模板:页面模板/同人社团";
+$wgMultiBoilerplateOptions["现实人物"] = "模板:页面模板/现实人物";
+$wgMultiBoilerplateOptions["同人专辑"] = "模板:页面模板/同人专辑";
+$wgMultiBoilerplateOptions["同人游戏/软件"] = "模板:页面模板/同人游戏";
+$wgMultiBoilerplateOptions["同人志"] = "模板:页面模板/同人志";
+$wgMultiBoilerplateOptions["同人视频"] = "模板:页面模板/同人视频";
+$wgMultiBoilerplateOptions["曲目歌词"] = "模板:页面模板/曲目歌词";
+$wgMultiBoilerplateOptions["周边"] = "模板:页面模板/周边";
+$wgMultiBoilerplateOptions["模型周边"] = "模板:页面模板/模型周边";
+$wgMultiBoilerplateOptions["同人展会"] = "模板:页面模板/同人展会";
+$wgMultiBoilerplateOptions["同人活动"] = "模板:页面模板/同人活动";
+$wgMultiBoilerplateOptions["官方原曲"] = "模板:页面模板/原曲页面";
+$wgMultiBoilerplateOptions["官方场景"] = "模板:页面模板/官方场景";
+$wgMultiBoilerplateOptions["符卡页面"] = "模板:页面模板/符卡页面";
+$wgMultiBoilerplateOptions["东方关联人物"] = "模板:页面模板/东方关联人物";
+//$wgMultiBoilerplateOptions["同人曲目评分"] = "模板:页面模板/同人曲目评分";
+$wgMultiBoilerplateOptions["游戏对话"] = "模板:页面模板/游戏对话";
+$wgMultiBoilerplateOptions["活动摊位列表"] = "模板:页面模板/活动摊位列表";
+
+wfLoadExtension('MultimediaViewer');
+$wgMediaViewerEnableByDefault = true;
+$wgMediaViewerEnableByDefaultForAnonymous = true;
+//$wgMediaViewerUseThumbnailGuessing = true;
+
+wfLoadExtension('OAuth');
+require_once "$IP/settings/secrets/OAuth.php";
+$wgMWOAuthCentralWiki = false;
+$wgMWOAuthSharedUserIDs = false;
+$wgMWOAuthSharedUserSource = false;
+$wgMWOAuthRequestExpirationAge = 30 * 86400;
+$wgMWOAuthSecureTokenTransfer = true;
+$wgOAuthGroupsToNotify = ['user'];
+
+wfLoadExtension('PageImages');
+$wgPageImagesOpenGraph = false;
+$wgPageImagesLeadSectionOnly = false;
+$wgPageImagesAPIDefaultLicense = 'any';
+$wgPageImagesNamespaces = $wgContentNamespaces;
+$wgPageImagesScores['ratio'] = [
+	"3" => -100,
+	"4" => 0,
+	"20" => 5,
+	"30" => 0,
+	"31" => -100,
+];
+
+wfLoadExtension('PageNotice');
+
+wfLoadExtension('QRLite');
+
+//wfLoadExtension( 'RegexFun' );
+require_once "$IP/extensions/RegexFun/RegexFun.php";
+
+wfLoadExtension('RelatedArticles');
+$wgRelatedArticlesUseCirrusSearchApiUrl = '/api.php';
+$wgRelatedArticlesShowInSidebar = false;
+$wgRelatedArticlesShowInFooter = true;
+$wgRelatedArticlesUseCirrusSearch = true;
+$wgRelatedArticlesOnlyUseCirrusSearch = false;
+$wgRelatedArticlesCardLimit = 6;
+$wgRelatedArticlesFooterWhitelistedSkins = ['vector', 'unicorn'];
+
+wfLoadExtension('ReplaceSet');
+$egReplaceSetCallLimit = 200;
+$egReplaceSetPregLimit = 200;
+
+wfLoadExtension('ReplaceText');
+//$wgReplaceTextUser = '替换文字';
+
+// Disable Score for security reasons https://www.mediawiki.org/wiki/Extension:Score/2021_security_advisory
+//wfLoadExtension( 'Score' );
+//$wgScoreLilyPond = '/usr/local/bin/lilypond'; // required
+//$wgScoreAbc2Ly = '/usr/local/bin/abc2ly'; // if you want ABC to LilyPond conversion
+//$wgScoreTimidity = '/usr/local/bin/timidity'; // if you want MIDI to Vorbis conversion
+//$wgScoreLame = '/usr/local/bin/lame'; // if you want MIDI to mp3 conversion
+//$wgScoreTrim = false; //true Set to false if you don't want score trimming
+
+wfLoadExtension('Scribunto');
+$wgScribuntoDefaultEngine = 'luasandbox';
+
+require_once "$IP/extensions/SocialProfile/SocialProfile.php";
+//Avatar
+$wgAvatarPath = 'https://avatar.thbwiki.cc/';
+//Friends/Foes
+$wgUserProfileDisplay['friends'] = true;
+$wgUserProfileDisplay['foes'] = true;
+$wgUserProfileDisplay['activity'] = true;
+$wgUserProfileDisplay['achiev'] = true;
+//$wgFriendingEnabled = false;
+//Board
+$wgUserBoard = false;
+$wgUserProfileDisplay['board'] = false;
+//User-specific statistics
+$wgUserProfileDisplay['stats'] = false;
+$wgUserProfileDisplay['gifts'] = false;
+$wgUserProfileDisplay['awards'] = false;
+$wgUserProfileDisplay['games'] = false;
+$wgUserProfileDisplay['gifts'] = false;
+//StatsTrackWeekly
+$wgUserStatsTrackWeekly = false;
+#Logging
+$wgUploadAvatarInRecentChanges = true;
+$wgUpdateProfileInRecentChanges = true;
+//$wgUserProfileThresholds = ['edits' => 2];
+
+$wgAvatarKey = 'thwikicc_wiki';
+
+$wgNamespacesWithSubpages[NS_USER_WIKI] = true;
+
+wfLoadExtension('SpamBlacklist');
+$wgBlacklistSettings = [
+	'email' => [
+		'files' => [
+			"$IP/settings/secrets/EmailBlacklist.txt"
+		],
+	],
+];
+// $wgLogSpamBlacklistHits = true;
+
+wfLoadExtension('TabberNeue');
+
+require_once "$IP/extensions/TableMapping/TableMapping.php";
+
+//wfLoadExtension('TailwindCSS');
+$wgTailwindCSSStyleBuilderServer = 'localhost:8067';
+
+wfLoadExtension('TemplateData');
+
+wfLoadExtension('TemplateFunctions');
+
+wfLoadExtension('TemplateStyles');
+
+$wgTemplateStylesAllowedUrls = [
+	"audio" => [
+		"<^https://upload\\.thbwiki\\.cc/>"
+	],
+	"image" => [
+		"<^https://upload\\.thbwiki\\.cc/>"
+	],
+	"svg" => [
+		"<^https://upload\\.thbwiki\\.cc/[^?#]*\\.svg(?:[?#]|$)>"
+	],
+	"font" => [],
+	"namespace" => [
+		"<.>"
+	],
+	"css" => []
+];
+
+$wgTemplateStylesNamespaces = [
+	NS_TEMPLATE => true
+];
+
+wfLoadExtension('TextExtracts');
+
+wfLoadExtension('TextTransform');
+
+wfLoadExtension('UrlGetParameters');
+
+wfLoadExtension('Variables');
+
+wfLoadExtension('VariablesLua');
+
+wfLoadExtension('Widgets');
+
+wfLoadExtension('YouTube');
