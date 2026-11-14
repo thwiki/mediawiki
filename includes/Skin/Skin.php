@@ -1338,6 +1338,9 @@ abstract class Skin extends ContextSource {
 		} else {
 			$nav_urls['upload'] = false;
 		}
+		// [1.46 迁移] 1.39 的工具栏含「特殊页面」，1.46 从 buildNavUrls/makeToolbox 两处都删了；
+		// THBWiki 皮肤侧栏依赖该项，这里恢复（见 THBWiki-1.46-适配补丁清单.md）。
+		$nav_urls['specialpages'] = [ 'href' => SkinComponentUtils::makeSpecialUrl( 'SpecialPages' ) ];
 
 		$nav_urls['print'] = false;
 		$nav_urls['permalink'] = false;
@@ -1731,6 +1734,16 @@ abstract class Skin extends ContextSource {
 				}
 			} else {
 				$line = trim( $line, '* ' );
+
+				// [THBWiki 1.46 修复] 直接解析 [[目标|文字]]，不再依赖 MessageParser 的返回值，
+				// 否则标签会残留 "]]"、链接目标变成 "[[目标"（导致 href 为空）。
+				if ( preg_match( '/^\[\[:?([^\]|]+)(?:\|([^\]]+))?\]\]$/', $line, $m ) ) {
+					$item = $this->createSidebarItem( $m[1], $m[2] ?? $m[1] );
+					if ( $item !== null ) {
+						$bar[$heading][] = $item;
+					}
+					continue;
+				}
 
 				if ( str_contains( $line, '|' ) ) {
 					$line = $messageParser->transform( $line, false, null, $messageTitle );
@@ -2137,7 +2150,7 @@ abstract class Skin extends ContextSource {
 			}
 		}
 		foreach ( [ 'contributions', 'log', 'blockip', 'changeblockip', 'unblockip',
-			'block-manage-blocks', 'emailuser', 'mute', 'userrights', 'upload' ] as $special
+			'block-manage-blocks', 'emailuser', 'mute', 'userrights', 'upload', 'specialpages' ] as $special
 		) {
 			if ( $navUrls[$special] ?? null ) {
 				$toolbox[$special] = $navUrls[$special];
