@@ -244,8 +244,6 @@ wfLoadExtension('LanguageSelector');
 $wgLanguageSelectorShowAll = false;
 $wgLanguageSelectorDetectLanguage = 0; // LANGUAGE_SELECTOR_USE_CONTENT_LANG;
 $wgLanguageSelectorLocation = 3; // LANGUAGE_SELECTOR_AS_PORTLET;
-// [1.46 迁移] 语言选择器保留 中文 / 日本語 / English / Italiano（与生产一致）
-$wgLanguageSelectorLanguages = [ 'zh', 'ja', 'en', 'it' ];
 
 wfLoadExtension('Lockdown');
 $wgActionLockdown['history'] = ['user'];

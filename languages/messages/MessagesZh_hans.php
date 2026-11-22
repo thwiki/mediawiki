@@ -101,20 +101,6 @@ $namespaceNames = [
 	NS_HELP_TALK        => '帮助讨论',
 	NS_CATEGORY         => '分类',
 	NS_CATEGORY_TALK    => '分类讨论',
-	828 => '模块',
-	829 => '模块讨论',
-		NS_OMAKE             => '附带文档',
-		NS_OMAKE_TALK        => '附带文档讨论',
-		NS_GDIALOGUE         => '游戏对话',
-		NS_GDIALOGUE_TALK    => '游戏对话讨论',
-		NS_WIDGET            => 'Widget',
-		NS_WIDGET_TALK       => 'Widget讨论',
-		NS_USER_WIKI         => '用户Wiki',
-		NS_USER_WIKI_TALK    => '用户Wiki讨论',
-		NS_USER_PROFILE      => '用户资料',
-		NS_USER_PROFILE_TALK => '用户资料讨论',
-		NS_MODULE 			 => '模块',
-		NS_MODULE_TALK 		 => '模块讨论',
 ];
 
 $namespaceAliases = [

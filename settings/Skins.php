@@ -8,7 +8,7 @@ if (!defined('MEDIAWIKI')) {
 
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, ie 'vector', 'monobook':
-$wgDefaultSkin = "unicorn";
+$wgDefaultSkin = "Citizen";
 //$wgDefaultSkin = "vector";
 
 # Enabled skins.

@@ -66,10 +66,6 @@
 	path = extensions/Nuke
 	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/Nuke
 	branch = REL1_46
-[submodule "extensions/OATHAuth"]
-	path = extensions/OATHAuth
-	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/OATHAuth
-	branch = REL1_46
 [submodule "extensions/PageImages"]
 	path = extensions/PageImages
 	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/PageImages
